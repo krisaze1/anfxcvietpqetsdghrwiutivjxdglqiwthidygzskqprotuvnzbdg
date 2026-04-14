@@ -31,7 +31,6 @@
     min-height: 100vh;
   }
 
-  /* TOP BAR */
   .topbar {
     position: sticky;
     top: 0;
@@ -56,6 +55,7 @@
   .topbar-date {
     font-size: 10px;
     color: var(--muted);
+    margin-top: 2px;
   }
 
   .refresh-btn {
@@ -68,10 +68,12 @@
     font-size: 10px;
     cursor: pointer;
     transition: all 0.2s;
+    min-width: 80px;
+    text-align: center;
   }
   .refresh-btn:active { background: var(--accent); color: var(--bg); }
+  .refresh-btn.loading { opacity: 0.6; pointer-events: none; }
 
-  /* TOTALS STRIP */
   .totals-strip {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -104,7 +106,6 @@
   .total-value.roi-pos { color: var(--positive); }
   .total-value.roi-neg { color: var(--negative); }
 
-  /* TABLE WRAPPER */
   .table-wrapper {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -129,7 +130,11 @@
     border-bottom: 1px solid var(--border);
     white-space: nowrap;
     z-index: 10;
+    cursor: pointer;
+    user-select: none;
   }
+
+  thead th:hover { color: var(--text); }
 
   thead th:first-child {
     text-align: left;
@@ -184,15 +189,6 @@
   .dep-val { color: var(--accent3); font-weight: 600; }
   .rev-val { color: var(--accent3); }
 
-  /* ROW INDEX */
-  .row-num {
-    color: var(--muted);
-    font-size: 9px;
-    padding-right: 4px;
-    user-select: none;
-  }
-
-  /* LOADING */
   .loading {
     display: flex;
     flex-direction: column;
@@ -219,7 +215,6 @@
     letter-spacing: 0.1em;
   }
 
-  /* ERROR */
   .error-box {
     margin: 20px 14px;
     padding: 14px;
@@ -231,12 +226,10 @@
     line-height: 1.6;
   }
 
-  /* SORT INDICATOR */
   th.sorted { color: var(--accent); }
   th.sorted::after { content: ' ↓'; }
   th.sorted.asc::after { content: ' ↑'; }
 
-  /* LAST UPDATED */
   .footer {
     padding: 10px 14px;
     text-align: center;
@@ -247,7 +240,6 @@
     margin-top: 8px;
   }
 
-  /* EMPTY */
   .empty {
     padding: 40px;
     text-align: center;
@@ -255,7 +247,24 @@
     font-size: 11px;
   }
 
-  /* Scrollbar styling */
+  /* Автообновление индикатор */
+  .auto-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--bg);
+    font-size: 8px;
+    padding: 2px 5px;
+    border-radius: 3px;
+    margin-left: 6px;
+    font-weight: 700;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
   ::-webkit-scrollbar { height: 3px; width: 3px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
@@ -266,10 +275,10 @@
 
 <div class="topbar">
   <div>
-    <div class="topbar-title">📊 STATS</div>
+    <div class="topbar-title">📊 STATS <span id="autoBadge" class="auto-badge" style="display:none">LIVE</span></div>
     <div class="topbar-date" id="dateRange">загрузка...</div>
   </div>
-  <button class="refresh-btn" onclick="loadData()">↺ обновить</button>
+  <button class="refresh-btn" id="refreshBtn" onclick="manualRefresh()">↺ обновить</button>
 </div>
 
 <div id="totalsStrip" class="totals-strip" style="display:none">
@@ -283,7 +292,7 @@
   </div>
   <div class="total-card">
     <div class="total-label">Dep</div>
-    <div class="total-value dep" id="t-dep">—</div>
+    <div class="total-value" id="t-dep">—</div>
   </div>
   <div class="total-card">
     <div class="total-label">Rev</div>
@@ -296,7 +305,6 @@
 </div>
 
 <div id="main"></div>
-
 <div class="footer" id="footer"></div>
 
 <script>
@@ -304,14 +312,23 @@ const DATA_URL = 'data.json';
 let allData = [];
 let sortCol = 'Spend';
 let sortAsc = false;
+let autoRefreshTimer = null;
+const AUTO_REFRESH_INTERVAL = 60 * 1000; // каждую минуту проверяем свежесть данных
 
-async function loadData() {
+async function loadData(showSpinner = true) {
   const main = document.getElementById('main');
-  main.innerHTML = `<div class="loading"><div class="spinner"></div><div class="loading-text">ЗАГРУЗКА ДАННЫХ...</div></div>`;
-  document.getElementById('totalsStrip').style.display = 'none';
+
+  if (showSpinner) {
+    main.innerHTML = `<div class="loading"><div class="spinner"></div><div class="loading-text">ЗАГРУЗКА ДАННЫХ...</div></div>`;
+    document.getElementById('totalsStrip').style.display = 'none';
+  }
 
   try {
-    const res = await fetch(DATA_URL + '?t=' + Date.now());
+    // Принудительно обходим кэш — добавляем timestamp к запросу
+    const res = await fetch(DATA_URL + '?nocache=' + Date.now(), {
+      cache: 'no-store',
+      headers: { 'Cache-Control': 'no-cache, no-store, must-revalidate', 'Pragma': 'no-cache' }
+    });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const json = await res.json();
 
@@ -335,6 +352,16 @@ async function loadData() {
       Убедись что скрипт запускался и файл data.json существует.
     </div>`;
   }
+}
+
+function manualRefresh() {
+  const btn = document.getElementById('refreshBtn');
+  btn.textContent = '...';
+  btn.classList.add('loading');
+  loadData(false).finally(() => {
+    btn.textContent = '↺ обновить';
+    btn.classList.remove('loading');
+  });
 }
 
 function renderTotals(t) {
@@ -364,7 +391,6 @@ function renderTable(data) {
     return;
   }
 
-  // Sort
   const sorted = [...data].sort((a, b) => {
     let av = a[sortCol], bv = b[sortCol];
     av = isNaN(av) ? String(av) : Number(av);
@@ -422,10 +448,18 @@ function setSort(col) {
   renderTable(allData);
 }
 
-// Init
-loadData();
+// Автообновление страницы каждую минуту (подхватывает новый data.json если скрипт его запушил)
+function startAutoRefresh() {
+  document.getElementById('autoBadge').style.display = 'inline-block';
+  autoRefreshTimer = setInterval(() => {
+    loadData(false);
+  }, AUTO_REFRESH_INTERVAL);
+}
 
-// Telegram Mini App integration
+// Инициализация
+loadData();
+startAutoRefresh();
+
 if (window.Telegram && window.Telegram.WebApp) {
   window.Telegram.WebApp.ready();
   window.Telegram.WebApp.expand();
