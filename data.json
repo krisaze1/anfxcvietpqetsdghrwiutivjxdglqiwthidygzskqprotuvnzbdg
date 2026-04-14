@@ -2,31 +2,31 @@
   "meta": {
     "date_from": "2026-04-14",
     "date_to": "2026-04-14",
-    "updated_at": "2026-04-15 02:49:01"
+    "updated_at": "2026-04-15 02:57:07"
   },
   "totals": {
-    "Spend": 997,
-    "Clicks": 297,
-    "Avg CPC": 3.36,
-    "Lids": 172,
-    "CPL": 5.8,
+    "Spend": 998,
+    "Clicks": 298,
+    "Avg CPC": 3.35,
+    "Lids": 173,
+    "CPL": 5.77,
     "Reg": 89,
     "Dep": 9,
     "Revenue": 1035.31,
-    "ROI": "3.84%"
+    "ROI": "3.74%"
   },
   "data": [
     {
       "Creative": "bgchickenugccardnosub1",
-      "Spend": 612,
-      "Clicks": 253,
-      "Avg CPC": 2.42,
-      "Lids": 137,
-      "CPL": 4.47,
+      "Spend": 613,
+      "Clicks": 254,
+      "Avg CPC": 2.41,
+      "Lids": 138,
+      "CPL": 4.44,
       "Reg": 72,
       "Dep": 4,
       "Revenue": 464.71,
-      "ROI": "-24.12%"
+      "ROI": "-24.21%"
     },
     {
       "Creative": "frchickenugcai1",
