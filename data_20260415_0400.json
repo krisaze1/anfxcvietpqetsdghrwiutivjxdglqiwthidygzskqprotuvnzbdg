@@ -2,7 +2,7 @@
   "meta": {
     "date_from": "2026-04-15",
     "date_to": "2026-04-15",
-    "updated_at": "2026-04-15 04:06:03",
+    "updated_at": "2026-04-15 04:07:37",
     "filename": "data_20260415_0400.json"
   },
   "totals": {
@@ -21,9 +21,9 @@
       "Creative": "bgchickenugccardnosub1",
       "Spend": 42,
       "Clicks": 25,
-      "Avg CPC": 1.7,
+      "Avg CPC": 1.71,
       "Lids": 1,
-      "CPL": 42.62,
+      "CPL": 42.63,
       "Reg": 0,
       "Dep": 0,
       "Revenue": 0,
