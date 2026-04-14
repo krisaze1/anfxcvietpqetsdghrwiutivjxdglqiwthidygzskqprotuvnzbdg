@@ -44,35 +44,38 @@
     backdrop-filter: blur(10px);
   }
 
+  .topbar-left { display: flex; flex-direction: column; gap: 2px; }
+
   .topbar-title {
     font-family: 'Unbounded', sans-serif;
     font-size: 13px;
     font-weight: 700;
     color: var(--accent);
     letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
   }
 
-  .topbar-date {
-    font-size: 10px;
+  .topbar-date { font-size: 10px; color: var(--muted); }
+
+  .live-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--bg);
+    font-size: 8px;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-weight: 700;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  .updated-time {
+    font-size: 9px;
     color: var(--muted);
-    margin-top: 2px;
   }
-
-  .refresh-btn {
-    background: none;
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    cursor: pointer;
-    transition: all 0.2s;
-    min-width: 80px;
-    text-align: center;
-  }
-  .refresh-btn:active { background: var(--accent); color: var(--bg); }
-  .refresh-btn.loading { opacity: 0.6; pointer-events: none; }
 
   .totals-strip {
     display: grid;
@@ -111,11 +114,7 @@
     -webkit-overflow-scrolling: touch;
   }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 600px;
-  }
+  table { width: 100%; border-collapse: collapse; min-width: 600px; }
 
   thead th {
     position: sticky;
@@ -189,6 +188,10 @@
   .dep-val { color: var(--accent3); font-weight: 600; }
   .rev-val { color: var(--accent3); }
 
+  th.sorted { color: var(--accent); }
+  th.sorted::after { content: ' ↓'; }
+  th.sorted.asc::after { content: ' ↑'; }
+
   .loading {
     display: flex;
     flex-direction: column;
@@ -208,12 +211,7 @@
   }
 
   @keyframes spin { to { transform: rotate(360deg); } }
-
-  .loading-text {
-    color: var(--muted);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-  }
+  .loading-text { color: var(--muted); font-size: 11px; letter-spacing: 0.1em; }
 
   .error-box {
     margin: 20px 14px;
@@ -226,59 +224,23 @@
     line-height: 1.6;
   }
 
-  th.sorted { color: var(--accent); }
-  th.sorted::after { content: ' ↓'; }
-  th.sorted.asc::after { content: ' ↑'; }
-
-  .footer {
-    padding: 10px 14px;
-    text-align: center;
-    color: var(--muted);
-    font-size: 9px;
-    letter-spacing: 0.05em;
-    border-top: 1px solid var(--border);
-    margin-top: 8px;
-  }
-
-  .empty {
-    padding: 40px;
-    text-align: center;
-    color: var(--muted);
-    font-size: 11px;
-  }
-
-  /* Автообновление индикатор */
-  .auto-badge {
-    display: inline-block;
-    background: var(--accent);
-    color: var(--bg);
-    font-size: 8px;
-    padding: 2px 5px;
-    border-radius: 3px;
-    margin-left: 6px;
-    font-weight: 700;
-    animation: pulse 1.5s ease-in-out infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
+  .empty { padding: 40px; text-align: center; color: var(--muted); font-size: 11px; }
 
   ::-webkit-scrollbar { height: 3px; width: 3px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-  ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
 </style>
 </head>
 <body>
 
 <div class="topbar">
-  <div>
-    <div class="topbar-title">📊 STATS <span id="autoBadge" class="auto-badge" style="display:none">LIVE</span></div>
+  <div class="topbar-left">
+    <div class="topbar-title">
+      📊 STATS <span class="live-badge">LIVE</span>
+    </div>
     <div class="topbar-date" id="dateRange">загрузка...</div>
   </div>
-  <button class="refresh-btn" id="refreshBtn" onclick="manualRefresh()">↺ обновить</button>
+  <div class="updated-time" id="updatedTime"></div>
 </div>
 
 <div id="totalsStrip" class="totals-strip" style="display:none">
@@ -305,29 +267,25 @@
 </div>
 
 <div id="main"></div>
-<div class="footer" id="footer"></div>
 
 <script>
 const DATA_URL = 'data.json';
 let allData = [];
 let sortCol = 'Spend';
 let sortAsc = false;
-let autoRefreshTimer = null;
-const AUTO_REFRESH_INTERVAL = 60 * 1000; // каждую минуту проверяем свежесть данных
 
-async function loadData(showSpinner = true) {
+async function loadData(showSpinner) {
   const main = document.getElementById('main');
 
   if (showSpinner) {
-    main.innerHTML = `<div class="loading"><div class="spinner"></div><div class="loading-text">ЗАГРУЗКА ДАННЫХ...</div></div>`;
+    main.innerHTML = `<div class="loading"><div class="spinner"></div><div class="loading-text">ЗАГРУЗКА...</div></div>`;
     document.getElementById('totalsStrip').style.display = 'none';
   }
 
   try {
-    // Принудительно обходим кэш — добавляем timestamp к запросу
-    const res = await fetch(DATA_URL + '?nocache=' + Date.now(), {
+    const res = await fetch(DATA_URL + '?t=' + Date.now(), {
       cache: 'no-store',
-      headers: { 'Cache-Control': 'no-cache, no-store, must-revalidate', 'Pragma': 'no-cache' }
+      headers: { 'Cache-Control': 'no-cache' }
     });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const json = await res.json();
@@ -336,42 +294,28 @@ async function loadData(showSpinner = true) {
     const meta = json.meta || {};
 
     document.getElementById('dateRange').textContent = meta.date_from && meta.date_to
-      ? `${meta.date_from} → ${meta.date_to}`
-      : 'нет данных';
+      ? `${meta.date_from} → ${meta.date_to}` : '';
 
-    document.getElementById('footer').textContent =
-      meta.updated_at ? `обновлено: ${meta.updated_at}` : '';
+    document.getElementById('updatedTime').textContent =
+      meta.updated_at ? meta.updated_at.slice(11, 16) : '';
 
     renderTotals(json.totals || {});
     renderTable(allData);
 
   } catch(e) {
-    main.innerHTML = `<div class="error-box">
-      ⚠ Не удалось загрузить данные<br><br>
-      <span style="color:var(--muted)">${e.message}</span><br><br>
-      Убедись что скрипт запускался и файл data.json существует.
-    </div>`;
+    if (showSpinner) {
+      main.innerHTML = `<div class="error-box">⚠ Ошибка загрузки<br><br><span style="color:var(--muted)">${e.message}</span></div>`;
+    }
   }
 }
 
-function manualRefresh() {
-  const btn = document.getElementById('refreshBtn');
-  btn.textContent = '...';
-  btn.classList.add('loading');
-  loadData(false).finally(() => {
-    btn.textContent = '↺ обновить';
-    btn.classList.remove('loading');
-  });
-}
-
 function renderTotals(t) {
-  if (!t.Spend && !t.Revenue) return;
+  if (!t || (!t.Spend && !t.Revenue)) return;
   document.getElementById('totalsStrip').style.display = 'grid';
   document.getElementById('t-spend').textContent = fmt(t.Spend) || '—';
   document.getElementById('t-lids').textContent = t.Lids || '—';
   document.getElementById('t-dep').textContent = t.Dep || '—';
   document.getElementById('t-rev').textContent = fmt(t.Revenue) || '—';
-
   const roiEl = document.getElementById('t-roi');
   const roi = parseFloat(t.ROI) || 0;
   roiEl.textContent = t.ROI || '—';
@@ -385,7 +329,6 @@ function fmt(n) {
 
 function renderTable(data) {
   const main = document.getElementById('main');
-
   if (!data || data.length === 0) {
     main.innerHTML = '<div class="empty">нет данных за выбранный период</div>';
     return;
@@ -448,17 +391,9 @@ function setSort(col) {
   renderTable(allData);
 }
 
-// Автообновление страницы каждую минуту (подхватывает новый data.json если скрипт его запушил)
-function startAutoRefresh() {
-  document.getElementById('autoBadge').style.display = 'inline-block';
-  autoRefreshTimer = setInterval(() => {
-    loadData(false);
-  }, AUTO_REFRESH_INTERVAL);
-}
-
-// Инициализация
-loadData();
-startAutoRefresh();
+// Автообновление каждую минуту без спиннера
+loadData(true);
+setInterval(() => loadData(false), 60 * 1000);
 
 if (window.Telegram && window.Telegram.WebApp) {
   window.Telegram.WebApp.ready();
