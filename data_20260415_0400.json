@@ -2,7 +2,7 @@
   "meta": {
     "date_from": "2026-04-15",
     "date_to": "2026-04-15",
-    "updated_at": "2026-04-15 04:04:29",
+    "updated_at": "2026-04-15 04:06:03",
     "filename": "data_20260415_0400.json"
   },
   "totals": {
@@ -23,7 +23,7 @@
       "Clicks": 25,
       "Avg CPC": 1.7,
       "Lids": 1,
-      "CPL": 42.6,
+      "CPL": 42.62,
       "Reg": 0,
       "Dep": 0,
       "Revenue": 0,
