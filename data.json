@@ -2,14 +2,14 @@
   "meta": {
     "date_from": "2026-04-14",
     "date_to": "2026-04-14",
-    "updated_at": "2026-04-15 02:33:33"
+    "updated_at": "2026-04-15 02:49:01"
   },
   "totals": {
     "Spend": 997,
     "Clicks": 297,
     "Avg CPC": 3.36,
-    "Lids": 171,
-    "CPL": 5.83,
+    "Lids": 172,
+    "CPL": 5.8,
     "Reg": 89,
     "Dep": 9,
     "Revenue": 1035.31,
@@ -21,12 +21,12 @@
       "Spend": 612,
       "Clicks": 253,
       "Avg CPC": 2.42,
-      "Lids": 136,
-      "CPL": 4.5,
+      "Lids": 137,
+      "CPL": 4.47,
       "Reg": 72,
       "Dep": 4,
       "Revenue": 464.71,
-      "ROI": "-24.10%"
+      "ROI": "-24.12%"
     },
     {
       "Creative": "frchickenugcai1",
