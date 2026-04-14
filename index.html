@@ -72,10 +72,7 @@
 
   @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-  .updated-time {
-    font-size: 9px;
-    color: var(--muted);
-  }
+  .updated-time { font-size: 9px; color: var(--muted); }
 
   .totals-strip {
     display: grid;
@@ -85,98 +82,50 @@
     border-bottom: 2px solid var(--accent);
   }
 
-  .total-card {
-    background: var(--surface);
-    padding: 8px 6px;
-    text-align: center;
-  }
+  .total-card { background: var(--surface); padding: 8px 6px; text-align: center; }
 
   .total-label {
-    font-size: 9px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 3px;
+    font-size: 9px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px;
   }
 
-  .total-value {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--accent);
-  }
-
+  .total-value { font-size: 13px; font-weight: 700; color: var(--accent); }
   .total-value.rev { color: var(--accent3); }
   .total-value.roi-pos { color: var(--positive); }
   .total-value.roi-neg { color: var(--negative); }
 
-  .table-wrapper {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
+  .table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
   table { width: 100%; border-collapse: collapse; min-width: 600px; }
 
   thead th {
-    position: sticky;
-    top: 0;
-    background: var(--header-bg);
-    color: var(--muted);
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding: 8px 8px;
-    text-align: right;
+    position: sticky; top: 0;
+    background: var(--header-bg); color: var(--muted);
+    font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em;
+    padding: 8px 8px; text-align: right;
     border-bottom: 1px solid var(--border);
-    white-space: nowrap;
-    z-index: 10;
-    cursor: pointer;
-    user-select: none;
+    white-space: nowrap; z-index: 10;
+    cursor: pointer; user-select: none;
   }
 
   thead th:hover { color: var(--text); }
 
   thead th:first-child {
-    text-align: left;
-    position: sticky;
-    left: 0;
-    z-index: 20;
-    background: var(--header-bg);
-    min-width: 100px;
-    max-width: 130px;
+    text-align: left; position: sticky; left: 0; z-index: 20;
+    background: var(--header-bg); min-width: 100px; max-width: 130px;
   }
 
-  tbody tr {
-    border-bottom: 1px solid var(--border);
-    transition: background 0.15s;
-    animation: fadeIn 0.3s ease both;
-  }
-
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; animation: fadeIn 0.3s ease both; }
   tbody tr:hover, tbody tr:active { background: #111120; }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(4px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
-  td {
-    padding: 9px 8px;
-    text-align: right;
-    font-size: 11px;
-    white-space: nowrap;
-    color: var(--text);
-  }
+  td { padding: 9px 8px; text-align: right; font-size: 11px; white-space: nowrap; color: var(--text); }
 
   td:first-child {
-    text-align: left;
-    position: sticky;
-    left: 0;
-    background: var(--bg);
-    z-index: 5;
-    font-size: 10px;
-    color: #aaaacc;
-    max-width: 130px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    text-align: left; position: sticky; left: 0;
+    background: var(--bg); z-index: 5; font-size: 10px; color: #aaaacc;
+    max-width: 130px; overflow: hidden; text-overflow: ellipsis;
     border-right: 1px solid var(--border);
   }
 
@@ -193,35 +142,23 @@
   th.sorted.asc::after { content: ' ↑'; }
 
   .loading {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 60px 20px;
-    gap: 16px;
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; padding: 60px 20px; gap: 16px;
   }
 
   .spinner {
-    width: 32px;
-    height: 32px;
-    border: 2px solid var(--border);
-    border-top-color: var(--accent);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
+    width: 32px; height: 32px;
+    border: 2px solid var(--border); border-top-color: var(--accent);
+    border-radius: 50%; animation: spin 0.8s linear infinite;
   }
 
   @keyframes spin { to { transform: rotate(360deg); } }
   .loading-text { color: var(--muted); font-size: 11px; letter-spacing: 0.1em; }
 
   .error-box {
-    margin: 20px 14px;
-    padding: 14px;
-    border: 1px solid var(--accent2);
-    border-radius: 6px;
-    background: #1a0a0e;
-    color: var(--accent2);
-    font-size: 11px;
-    line-height: 1.6;
+    margin: 20px 14px; padding: 14px;
+    border: 1px solid var(--accent2); border-radius: 6px;
+    background: #1a0a0e; color: var(--accent2); font-size: 11px; line-height: 1.6;
   }
 
   .empty { padding: 40px; text-align: center; color: var(--muted); font-size: 11px; }
@@ -244,60 +181,50 @@
 </div>
 
 <div id="totalsStrip" class="totals-strip" style="display:none">
-  <div class="total-card">
-    <div class="total-label">Spend</div>
-    <div class="total-value" id="t-spend">—</div>
-  </div>
-  <div class="total-card">
-    <div class="total-label">Lids</div>
-    <div class="total-value" id="t-lids">—</div>
-  </div>
-  <div class="total-card">
-    <div class="total-label">Dep</div>
-    <div class="total-value" id="t-dep">—</div>
-  </div>
-  <div class="total-card">
-    <div class="total-label">Rev</div>
-    <div class="total-value rev" id="t-rev">—</div>
-  </div>
-  <div class="total-card">
-    <div class="total-label">ROI</div>
-    <div class="total-value" id="t-roi">—</div>
-  </div>
+  <div class="total-card"><div class="total-label">Spend</div><div class="total-value" id="t-spend">—</div></div>
+  <div class="total-card"><div class="total-label">Lids</div><div class="total-value" id="t-lids">—</div></div>
+  <div class="total-card"><div class="total-label">Dep</div><div class="total-value" id="t-dep">—</div></div>
+  <div class="total-card"><div class="total-label">Rev</div><div class="total-value rev" id="t-rev">—</div></div>
+  <div class="total-card"><div class="total-label">ROI</div><div class="total-value" id="t-roi">—</div></div>
 </div>
 
 <div id="main"></div>
 
 <script>
-const DATA_URL = 'https://raw.githubusercontent.com/krisaze1/anfxcvietpqetsdghrwiutivjxdglqiwthidygzskqprotuvnzbdg/main/data.json';
+const BASE = 'https://krisaze1.github.io/anfxcvietpqetsdghrwiutivjxdglqiwthidygzskqprotuvnzbdg/';
 let allData = [];
 let sortCol = 'Spend';
 let sortAsc = false;
+let lastFilename = null;
 
 async function loadData(showSpinner) {
   const main = document.getElementById('main');
-
   if (showSpinner) {
     main.innerHTML = `<div class="loading"><div class="spinner"></div><div class="loading-text">ЗАГРУЗКА...</div></div>`;
     document.getElementById('totalsStrip').style.display = 'none';
   }
 
   try {
-    const res = await fetch(DATA_URL + '?t=' + Date.now(), {
-      cache: 'no-store',
-      headers: { 'Cache-Control': 'no-cache' }
-    });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const json = await res.json();
+    // Сначала получаем latest.json — там имя свежего файла
+    const latestResp = await fetch(BASE + 'latest.json?t=' + Date.now(), { cache: 'no-store' });
+    if (!latestResp.ok) throw new Error('latest.json not found');
+    const latest = await latestResp.json();
+    const filename = latest.filename;
+
+    // Если файл не изменился — не перегружаем таблицу
+    if (!showSpinner && filename === lastFilename) return;
+    lastFilename = filename;
+
+    // Загружаем сам файл данных (всегда новый т.к. имя уникальное)
+    const dataResp = await fetch(BASE + filename, { cache: 'no-store' });
+    if (!dataResp.ok) throw new Error('data file not found');
+    const json = await dataResp.json();
 
     allData = json.data || [];
     const meta = json.meta || {};
 
-    document.getElementById('dateRange').textContent = meta.date_from && meta.date_to
-      ? `${meta.date_from} → ${meta.date_to}` : '';
-
-    document.getElementById('updatedTime').textContent =
-      meta.updated_at ? meta.updated_at.slice(11, 16) : '';
+    document.getElementById('dateRange').textContent = meta.date_from || '';
+    document.getElementById('updatedTime').textContent = meta.updated_at ? meta.updated_at.slice(11, 16) : '';
 
     renderTotals(json.totals || {});
     renderTable(allData);
@@ -391,7 +318,6 @@ function setSort(col) {
   renderTable(allData);
 }
 
-// Автообновление каждую минуту без спиннера
 loadData(true);
 setInterval(() => loadData(false), 60 * 1000);
 
