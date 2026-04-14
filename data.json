@@ -2,18 +2,127 @@
   "meta": {
     "date_from": "2026-04-14",
     "date_to": "2026-04-14",
-    "updated_at": "2026-04-14 12:00:00"
+    "updated_at": "2026-04-15 02:33:33"
   },
   "totals": {
-    "Spend": 0,
-    "Clicks": 0,
-    "Avg CPC": "0.00",
-    "Lids": 0,
-    "CPL": "0.00",
-    "Reg": 0,
-    "Dep": 0,
-    "Revenue": "0.00",
-    "ROI": "0.00%"
+    "Spend": 997,
+    "Clicks": 297,
+    "Avg CPC": 3.36,
+    "Lids": 171,
+    "CPL": 5.83,
+    "Reg": 89,
+    "Dep": 9,
+    "Revenue": 1035.31,
+    "ROI": "3.84%"
   },
-  "data": []
+  "data": [
+    {
+      "Creative": "bgchickenugccardnosub1",
+      "Spend": 612,
+      "Clicks": 253,
+      "Avg CPC": 2.42,
+      "Lids": 136,
+      "CPL": 4.5,
+      "Reg": 72,
+      "Dep": 4,
+      "Revenue": 464.71,
+      "ROI": "-24.10%"
+    },
+    {
+      "Creative": "frchickenugcai1",
+      "Spend": 237,
+      "Clicks": 24,
+      "Avg CPC": 9.9,
+      "Lids": 12,
+      "CPL": 19.8,
+      "Reg": 4,
+      "Dep": 1,
+      "Revenue": 117.65,
+      "ROI": "-50.49%"
+    },
+    {
+      "Creative": "frchickenugcdep5europasspcardnosub1",
+      "Spend": 79,
+      "Clicks": 16,
+      "Avg CPC": 4.95,
+      "Lids": 12,
+      "CPL": 6.6,
+      "Reg": 8,
+      "Dep": 3,
+      "Revenue": 352.95,
+      "ROI": "345.98%"
+    },
+    {
+      "Creative": "eschickenugcai1",
+      "Spend": 37,
+      "Clicks": 2,
+      "Avg CPC": 18.99,
+      "Lids": 0,
+      "CPL": 0.0,
+      "Reg": 0,
+      "Dep": 0,
+      "Revenue": 0,
+      "ROI": "-100.00%"
+    },
+    {
+      "Creative": "itchickenugcdep5europasspcardnosub1",
+      "Spend": 32,
+      "Clicks": 2,
+      "Avg CPC": 16.29,
+      "Lids": 1,
+      "CPL": 32.57,
+      "Reg": 0,
+      "Dep": 0,
+      "Revenue": 0,
+      "ROI": "-100.00%"
+    },
+    {
+      "Creative": "trchickenugccard1",
+      "Spend": 0,
+      "Clicks": 0,
+      "Avg CPC": 0,
+      "Lids": 1,
+      "CPL": 0.0,
+      "Reg": 0,
+      "Dep": 0,
+      "Revenue": 0,
+      "ROI": "0.00%"
+    },
+    {
+      "Creative": "bgchickenugccard1",
+      "Spend": 0,
+      "Clicks": 0,
+      "Avg CPC": 0,
+      "Lids": 2,
+      "CPL": 0.0,
+      "Reg": 2,
+      "Dep": 1,
+      "Revenue": 100,
+      "ROI": "0.00%"
+    },
+    {
+      "Creative": "не нашли",
+      "Spend": 0,
+      "Clicks": 0,
+      "Avg CPC": 0,
+      "Lids": 7,
+      "CPL": 0.0,
+      "Reg": 2,
+      "Dep": 0,
+      "Revenue": 0,
+      "ROI": "0.00%"
+    },
+    {
+      "Creative": "frchickenugcdep5eurocard",
+      "Spend": 0,
+      "Clicks": 0,
+      "Avg CPC": 0,
+      "Lids": 0,
+      "CPL": 0.0,
+      "Reg": 1,
+      "Dep": 0,
+      "Revenue": 0,
+      "ROI": "0.00%"
+    }
+  ]
 }
