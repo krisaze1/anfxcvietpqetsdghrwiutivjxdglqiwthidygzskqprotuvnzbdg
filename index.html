@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Stats</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Unbounded:wght@400;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
   :root {
     --bg: #0a0a0f;
@@ -99,9 +98,9 @@
     color: var(--accent);
   }
 
-  .save-btn.saving {
-    opacity: 0.5;
-    pointer-events: none;
+  .save-btn.copied {
+    border-color: var(--accent);
+    color: var(--accent);
   }
 
   .totals-strip {
@@ -227,7 +226,7 @@
   </div>
   <div class="topbar-right">
     <div class="updated-time" id="updatedTime"></div>
-    <button class="save-btn" id="saveBtn" onclick="saveScreenshot()">💾 сохранить</button>
+    <button class="save-btn" id="saveBtn" onclick="shareLink()">🔗 поделиться</button>
   </div>
 </div>
 
@@ -369,48 +368,43 @@ function setSort(col) {
   renderTable(allData);
 }
 
-async function saveScreenshot() {
+function shareLink() {
   const btn = document.getElementById('saveBtn');
-  btn.textContent = '⏳ ...';
-  btn.classList.add('saving');
+  const url = window.location.href;
 
-  try {
-    const target = document.getElementById('screenshot-target');
-
-    // Делаем скриншот всего контента (не только видимой части)
-    const canvas = await html2canvas(target, {
-      backgroundColor: '#0a0a0f',
-      scale: 2,  // Высокое разрешение
-      useCORS: true,
-      allowTaint: true,
-      scrollX: 0,
-      scrollY: 0,
-      width: target.scrollWidth,
-      height: target.scrollHeight,
-      windowWidth: target.scrollWidth,
+  // Пробуем нативный шаринг (работает на мобильных)
+  if (navigator.share) {
+    navigator.share({
+      title: '📊 Stats',
+      text: 'Таблица статистики',
+      url: url
     });
-
-    // Формируем имя файла
-    const from = currentMeta.date_from || 'stats';
-    const to = currentMeta.date_to || '';
-    const name = from === to ? `stats_${from}.png` : `stats_${from}_${to}.png`;
-
-    // Скачиваем или сохраняем
-    canvas.toBlob((blob) => {
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = name;
-      a.click();
-      URL.revokeObjectURL(url);
-    }, 'image/png');
-
-  } catch(e) {
-    alert('Ошибка при создании скриншота: ' + e.message);
-  } finally {
-    btn.textContent = '💾 сохранить';
-    btn.classList.remove('saving');
+    return;
   }
+
+  // Если нет нативного шаринга — копируем в буфер
+  navigator.clipboard.writeText(url).then(() => {
+    btn.textContent = '✅ скопировано';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '🔗 поделиться';
+      btn.classList.remove('copied');
+    }, 2000);
+  }).catch(() => {
+    // Fallback если clipboard не работает
+    const el = document.createElement('textarea');
+    el.value = url;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    btn.textContent = '✅ скопировано';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '🔗 поделиться';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
 }
 
 loadData(true);
