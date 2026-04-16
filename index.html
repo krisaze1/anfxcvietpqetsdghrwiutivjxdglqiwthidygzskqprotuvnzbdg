@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Stats</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Unbounded:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
   :root {
     --bg: #0a0a0f;
@@ -76,7 +77,32 @@
 
   @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
+  .topbar-right { display: flex; align-items: center; gap: 8px; }
+
   .updated-time { font-size: 9px; color: var(--muted); }
+
+  .save-btn {
+    background: none;
+    border: 1px solid var(--muted);
+    color: var(--muted);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .save-btn:active, .save-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .save-btn.saving {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 
   .totals-strip {
     display: grid;
@@ -124,7 +150,6 @@
     animation: fadeIn 0.3s ease both;
   }
 
-  /* Цветовая подсветка строк */
   tbody tr.positive { background: var(--row-positive); }
   tbody tr.negative { background: var(--row-negative); }
   tbody tr.positive:hover, tbody tr.positive:active { background: var(--row-positive-hover); }
@@ -143,7 +168,6 @@
     border-right: 1px solid var(--border);
   }
 
-  /* Фон первой колонки совпадает с цветом строки */
   tbody tr.positive td:first-child { background: var(--row-positive); }
   tbody tr.negative td:first-child { background: var(--row-negative); }
   tbody tr:not(.positive):not(.negative) td:first-child { background: var(--bg); }
@@ -182,6 +206,11 @@
 
   .empty { padding: 40px; text-align: center; color: var(--muted); font-size: 11px; }
 
+  /* Специальный контейнер для скриншота */
+  #screenshot-target {
+    background: var(--bg);
+  }
+
   ::-webkit-scrollbar { height: 3px; width: 3px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
@@ -196,24 +225,30 @@
     </div>
     <div class="topbar-date" id="dateRange">загрузка...</div>
   </div>
-  <div class="updated-time" id="updatedTime"></div>
+  <div class="topbar-right">
+    <div class="updated-time" id="updatedTime"></div>
+    <button class="save-btn" id="saveBtn" onclick="saveScreenshot()">💾 сохранить</button>
+  </div>
 </div>
 
-<div id="totalsStrip" class="totals-strip" style="display:none">
-  <div class="total-card"><div class="total-label">Spend</div><div class="total-value" id="t-spend">—</div></div>
-  <div class="total-card"><div class="total-label">Lids</div><div class="total-value" id="t-lids">—</div></div>
-  <div class="total-card"><div class="total-label">Dep</div><div class="total-value" id="t-dep">—</div></div>
-  <div class="total-card"><div class="total-label">Rev</div><div class="total-value rev" id="t-rev">—</div></div>
-  <div class="total-card"><div class="total-label">ROI</div><div class="total-value" id="t-roi">—</div></div>
-</div>
+<div id="screenshot-target">
+  <div id="totalsStrip" class="totals-strip" style="display:none">
+    <div class="total-card"><div class="total-label">Spend</div><div class="total-value" id="t-spend">—</div></div>
+    <div class="total-card"><div class="total-label">Lids</div><div class="total-value" id="t-lids">—</div></div>
+    <div class="total-card"><div class="total-label">Dep</div><div class="total-value" id="t-dep">—</div></div>
+    <div class="total-card"><div class="total-label">Rev</div><div class="total-value rev" id="t-rev">—</div></div>
+    <div class="total-card"><div class="total-label">ROI</div><div class="total-value" id="t-roi">—</div></div>
+  </div>
 
-<div id="main"></div>
+  <div id="main"></div>
+</div>
 
 <script>
 const BASE = 'https://krisaze1.github.io/anfxcvietpqetsdghrwiutivjxdglqiwthidygzskqprotuvnzbdg/';
 let allData = [];
 let sortCol = 'Spend';
 let sortAsc = false;
+let currentMeta = {};
 
 function getFilename() {
   const params = new URLSearchParams(window.location.search);
@@ -234,12 +269,12 @@ async function loadData(showSpinner) {
     const json = await res.json();
 
     allData = json.data || [];
-    const meta = json.meta || {};
+    currentMeta = json.meta || {};
 
-    const from = meta.date_from || '';
-    const to = meta.date_to || '';
+    const from = currentMeta.date_from || '';
+    const to = currentMeta.date_to || '';
     document.getElementById('dateRange').textContent = from === to ? from : `${from} → ${to}`;
-    document.getElementById('updatedTime').textContent = meta.updated_at ? meta.updated_at.slice(11, 16) : '';
+    document.getElementById('updatedTime').textContent = currentMeta.updated_at ? currentMeta.updated_at.slice(11, 16) : '';
 
     renderTotals(json.totals || {});
     renderTable(allData);
@@ -309,7 +344,6 @@ function renderTable(data) {
   sorted.forEach((row, i) => {
     const roi = parseFloat(row['ROI']) || 0;
     const roiCls = roi >= 0 ? 'roi-pos' : 'roi-neg';
-    // Цветовая подсветка строки
     const rowCls = row['Spend'] > 0 ? (roi >= 0 ? 'positive' : 'negative') : '';
     html += `<tr class="${rowCls}" style="animation-delay:${i * 0.02}s">
       <td title="${row['Creative']}">${row['Creative']}</td>
@@ -333,6 +367,50 @@ function setSort(col) {
   if (sortCol === col) sortAsc = !sortAsc;
   else { sortCol = col; sortAsc = false; }
   renderTable(allData);
+}
+
+async function saveScreenshot() {
+  const btn = document.getElementById('saveBtn');
+  btn.textContent = '⏳ ...';
+  btn.classList.add('saving');
+
+  try {
+    const target = document.getElementById('screenshot-target');
+
+    // Делаем скриншот всего контента (не только видимой части)
+    const canvas = await html2canvas(target, {
+      backgroundColor: '#0a0a0f',
+      scale: 2,  // Высокое разрешение
+      useCORS: true,
+      allowTaint: true,
+      scrollX: 0,
+      scrollY: 0,
+      width: target.scrollWidth,
+      height: target.scrollHeight,
+      windowWidth: target.scrollWidth,
+    });
+
+    // Формируем имя файла
+    const from = currentMeta.date_from || 'stats';
+    const to = currentMeta.date_to || '';
+    const name = from === to ? `stats_${from}.png` : `stats_${from}_${to}.png`;
+
+    // Скачиваем или сохраняем
+    canvas.toBlob((blob) => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = name;
+      a.click();
+      URL.revokeObjectURL(url);
+    }, 'image/png');
+
+  } catch(e) {
+    alert('Ошибка при создании скриншота: ' + e.message);
+  } finally {
+    btn.textContent = '💾 сохранить';
+    btn.classList.remove('saving');
+  }
 }
 
 loadData(true);
