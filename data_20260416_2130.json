@@ -1,0 +1,117 @@
+{
+  "meta": {
+    "date_from": "2026-04-16",
+    "date_to": "2026-04-16",
+    "updated_at": "2026-04-16 21:31:09",
+    "filename": "data_20260416_2130.json"
+  },
+  "totals": {
+    "Spend": 1598,
+    "Clicks": 381,
+    "Avg CPC": 4.19,
+    "Lids": 165,
+    "CPL": 9.68,
+    "Reg": 70,
+    "Dep": 8,
+    "Revenue": 1101.65,
+    "ROI": "-31.06%"
+  },
+  "data": [
+    {
+      "Creative": "sechickenugckroncardnosub1",
+      "Spend": 853,
+      "Clicks": 139,
+      "Avg CPC": 6.14,
+      "Lids": 65,
+      "CPL": 13.14,
+      "Reg": 24,
+      "Dep": 3,
+      "Revenue": 600,
+      "ROI": "-29.73%"
+    },
+    {
+      "Creative": "bgchickenugccardnosubzoom1",
+      "Spend": 329,
+      "Clicks": 126,
+      "Avg CPC": 2.62,
+      "Lids": 57,
+      "CPL": 5.79,
+      "Reg": 28,
+      "Dep": 5,
+      "Revenue": 501.65,
+      "ROI": "52.02%"
+    },
+    {
+      "Creative": "eschickenugcdep5europasspcardnosub1",
+      "Spend": 219,
+      "Clicks": 32,
+      "Avg CPC": 6.86,
+      "Lids": 3,
+      "CPL": 73.13,
+      "Reg": 1,
+      "Dep": 0,
+      "Revenue": 0,
+      "ROI": "-100.00%"
+    },
+    {
+      "Creative": "bgchickenugccardnosub1",
+      "Spend": 197,
+      "Clicks": 84,
+      "Avg CPC": 2.35,
+      "Lids": 33,
+      "CPL": 5.98,
+      "Reg": 14,
+      "Dep": 0,
+      "Revenue": 0,
+      "ROI": "-100.00%"
+    },
+    {
+      "Creative": "bgchickenugccard1",
+      "Spend": 0,
+      "Clicks": 0,
+      "Avg CPC": 0,
+      "Lids": 1,
+      "CPL": 0.0,
+      "Reg": 1,
+      "Dep": 0,
+      "Revenue": 0,
+      "ROI": "0.00%"
+    },
+    {
+      "Creative": "itchickenugclasteuro1",
+      "Spend": 0,
+      "Clicks": 0,
+      "Avg CPC": 0,
+      "Lids": 1,
+      "CPL": 0.0,
+      "Reg": 1,
+      "Dep": 0,
+      "Revenue": 0,
+      "ROI": "0.00%"
+    },
+    {
+      "Creative": "не нашли",
+      "Spend": 0,
+      "Clicks": 0,
+      "Avg CPC": 0,
+      "Lids": 4,
+      "CPL": 0.0,
+      "Reg": 0,
+      "Dep": 0,
+      "Revenue": 0,
+      "ROI": "0.00%"
+    },
+    {
+      "Creative": "frchickenugcdep5europasspcardnosub1",
+      "Spend": 0,
+      "Clicks": 0,
+      "Avg CPC": 0,
+      "Lids": 1,
+      "CPL": 0.0,
+      "Reg": 1,
+      "Dep": 0,
+      "Revenue": 0,
+      "ROI": "0.00%"
+    }
+  ]
+}
