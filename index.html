@@ -202,7 +202,7 @@ let lastFilename = null;
 
 async function fetchFromGitHub(filename) {
   const resp = await fetch(API_BASE + filename, {
-    headers: { 'Accept': 'application/vnd.github.v3.raw' },
+    headers: { 'Accept': 'application/vnd.github.raw+json' },
     cache: 'no-store'
   });
   if (!resp.ok) throw new Error(filename + ' not found (' + resp.status + ')');
