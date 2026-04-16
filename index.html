@@ -95,14 +95,13 @@
   .total-value.roi-neg { color: var(--negative); }
 
   .table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-
   table { width: 100%; border-collapse: collapse; min-width: 600px; }
 
   thead th {
     position: sticky; top: 0;
     background: var(--header-bg); color: var(--muted);
     font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em;
-    padding: 8px 8px; text-align: right;
+    padding: 8px; text-align: right;
     border-bottom: 1px solid var(--border);
     white-space: nowrap; z-index: 10;
     cursor: pointer; user-select: none;
@@ -191,22 +190,16 @@
 <div id="main"></div>
 
 <script>
-// GitHub API — всегда свежие данные без кэша
-const REPO = 'krisaze1/anfxcvietpqetsdghrwiutivjxdglqiwthidygzskqprotuvnzbdg';
-const API_BASE = 'https://api.github.com/repos/' + REPO + '/contents/';
+const BASE = 'https://krisaze1.github.io/anfxcvietpqetsdghrwiutivjxdglqiwthidygzskqprotuvnzbdg/';
 
 let allData = [];
 let sortCol = 'Spend';
 let sortAsc = false;
-let lastFilename = null;
 
-async function fetchFromGitHub(filename) {
-  const resp = await fetch(API_BASE + filename, {
-    headers: { 'Accept': 'application/vnd.github.raw+json' },
-    cache: 'no-store'
-  });
-  if (!resp.ok) throw new Error(filename + ' not found (' + resp.status + ')');
-  return await resp.json();
+// Читаем имя файла из URL параметра ?f=data_20260416_1000.json
+function getFilename() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('f') || 'data.json';
 }
 
 async function loadData(showSpinner) {
@@ -217,16 +210,11 @@ async function loadData(showSpinner) {
   }
 
   try {
-    // Получаем latest.json через GitHub API — всегда свежий
-    const latest = await fetchFromGitHub('latest.json');
-    const filename = latest.filename;
-
-    // Если файл не изменился — не перерисовываем
-    if (!showSpinner && filename === lastFilename) return;
-    lastFilename = filename;
-
-    // Загружаем сам файл данных
-    const json = await fetchFromGitHub(filename);
+    const filename = getFilename();
+    // Имя файла уникальное каждые 10 минут — кэш не проблема
+    const res = await fetch(BASE + filename, { cache: 'no-store' });
+    if (!res.ok) throw new Error(filename + ' not found (' + res.status + ')');
+    const json = await res.json();
 
     allData = json.data || [];
     const meta = json.meta || {};
@@ -327,7 +315,6 @@ function setSort(col) {
 }
 
 loadData(true);
-setInterval(() => loadData(false), 60 * 1000);
 
 if (window.Telegram && window.Telegram.WebApp) {
   window.Telegram.WebApp.ready();
