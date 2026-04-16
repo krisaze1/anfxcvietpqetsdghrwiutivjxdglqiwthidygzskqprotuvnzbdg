@@ -18,6 +18,10 @@
     --positive: #00ff88;
     --negative: #ff4466;
     --header-bg: #0d0d1a;
+    --row-positive: rgba(0, 255, 136, 0.06);
+    --row-negative: rgba(255, 68, 102, 0.06);
+    --row-positive-hover: rgba(0, 255, 136, 0.12);
+    --row-negative-hover: rgba(255, 68, 102, 0.12);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -114,8 +118,19 @@
     background: var(--header-bg); min-width: 100px; max-width: 130px;
   }
 
-  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; animation: fadeIn 0.3s ease both; }
-  tbody tr:hover, tbody tr:active { background: #111120; }
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+    animation: fadeIn 0.3s ease both;
+  }
+
+  /* Цветовая подсветка строк */
+  tbody tr.positive { background: var(--row-positive); }
+  tbody tr.negative { background: var(--row-negative); }
+  tbody tr.positive:hover, tbody tr.positive:active { background: var(--row-positive-hover); }
+  tbody tr.negative:hover, tbody tr.negative:active { background: var(--row-negative-hover); }
+  tbody tr:not(.positive):not(.negative):hover,
+  tbody tr:not(.positive):not(.negative):active { background: #111120; }
 
   @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -123,12 +138,17 @@
 
   td:first-child {
     text-align: left; position: sticky; left: 0;
-    background: var(--bg); z-index: 5; font-size: 10px; color: #aaaacc;
+    background: transparent; z-index: 5; font-size: 10px; color: #aaaacc;
     max-width: 130px; overflow: hidden; text-overflow: ellipsis;
     border-right: 1px solid var(--border);
   }
 
-  tr:hover td:first-child, tr:active td:first-child { background: #111120; }
+  /* Фон первой колонки совпадает с цветом строки */
+  tbody tr.positive td:first-child { background: var(--row-positive); }
+  tbody tr.negative td:first-child { background: var(--row-negative); }
+  tbody tr:not(.positive):not(.negative) td:first-child { background: var(--bg); }
+  tbody tr.positive:hover td:first-child, tbody tr.positive:active td:first-child { background: var(--row-positive-hover); }
+  tbody tr.negative:hover td:first-child, tbody tr.negative:active td:first-child { background: var(--row-negative-hover); }
 
   .roi-pos { color: var(--positive); font-weight: 600; }
   .roi-neg { color: var(--negative); font-weight: 600; }
@@ -191,12 +211,10 @@
 
 <script>
 const BASE = 'https://krisaze1.github.io/anfxcvietpqetsdghrwiutivjxdglqiwthidygzskqprotuvnzbdg/';
-
 let allData = [];
 let sortCol = 'Spend';
 let sortAsc = false;
 
-// Читаем имя файла из URL параметра ?f=data_20260416_1000.json
 function getFilename() {
   const params = new URLSearchParams(window.location.search);
   return params.get('f') || 'data.json';
@@ -211,7 +229,6 @@ async function loadData(showSpinner) {
 
   try {
     const filename = getFilename();
-    // Имя файла уникальное каждые 10 минут — кэш не проблема
     const res = await fetch(BASE + filename, { cache: 'no-store' });
     if (!res.ok) throw new Error(filename + ' not found (' + res.status + ')');
     const json = await res.json();
@@ -219,7 +236,9 @@ async function loadData(showSpinner) {
     allData = json.data || [];
     const meta = json.meta || {};
 
-    document.getElementById('dateRange').textContent = meta.date_from || '';
+    const from = meta.date_from || '';
+    const to = meta.date_to || '';
+    document.getElementById('dateRange').textContent = from === to ? from : `${from} → ${to}`;
     document.getElementById('updatedTime').textContent = meta.updated_at ? meta.updated_at.slice(11, 16) : '';
 
     renderTotals(json.totals || {});
@@ -290,7 +309,9 @@ function renderTable(data) {
   sorted.forEach((row, i) => {
     const roi = parseFloat(row['ROI']) || 0;
     const roiCls = roi >= 0 ? 'roi-pos' : 'roi-neg';
-    html += `<tr style="animation-delay:${i * 0.02}s">
+    // Цветовая подсветка строки
+    const rowCls = row['Spend'] > 0 ? (roi >= 0 ? 'positive' : 'negative') : '';
+    html += `<tr class="${rowCls}" style="animation-delay:${i * 0.02}s">
       <td title="${row['Creative']}">${row['Creative']}</td>
       <td class="spend-val">${fmt(row['Spend'])}</td>
       <td>${row['Clicks'] || '—'}</td>
