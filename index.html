@@ -35,6 +35,7 @@
     min-height: 100vh;
   }
 
+  /* ТОПБАР */
   .topbar {
     position: sticky;
     top: 0;
@@ -77,10 +78,9 @@
   @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
   .topbar-right { display: flex; align-items: center; gap: 8px; }
-
   .updated-time { font-size: 9px; color: var(--muted); }
 
-  .save-btn {
+  .share-btn {
     background: none;
     border: 1px solid var(--muted);
     color: var(--muted);
@@ -92,17 +92,10 @@
     transition: all 0.2s;
     white-space: nowrap;
   }
+  .share-btn:active, .share-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .share-btn.copied { border-color: var(--accent); color: var(--accent); }
 
-  .save-btn:active, .save-btn:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  .save-btn.copied {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
+  /* ТОТАЛЫ */
   .totals-strip {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -112,35 +105,103 @@
   }
 
   .total-card { background: var(--surface); padding: 8px 6px; text-align: center; }
-
-  .total-label {
-    font-size: 9px; color: var(--muted);
-    text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px;
-  }
-
+  .total-label { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; }
   .total-value { font-size: 13px; font-weight: 700; color: var(--accent); }
   .total-value.rev { color: var(--accent3); }
   .total-value.roi-pos { color: var(--positive); }
   .total-value.roi-neg { color: var(--negative); }
 
-  .table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  table { width: 100%; border-collapse: collapse; min-width: 600px; }
+  /* ФИЛЬТР */
+  .filter-bar {
+    padding: 8px 14px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .filter-input {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .filter-input:focus { border-color: var(--accent); }
+  .filter-input::placeholder { color: var(--muted); }
+
+  .filter-clear {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0 4px;
+    display: none;
+  }
+
+  .filter-count {
+    font-size: 9px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  /* ТАБЛИЦА */
+  .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    /* Важно для фикса sticky на мобиле */
+    position: relative;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 620px;
+    /* Изолируем контекст для sticky */
+    isolation: isolate;
+  }
+
+  thead { position: relative; z-index: 2; }
 
   thead th {
-    position: sticky; top: 0;
-    background: var(--header-bg); color: var(--muted);
-    font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em;
-    padding: 8px; text-align: right;
+    background: var(--header-bg);
+    color: var(--muted);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 8px;
+    text-align: right;
     border-bottom: 1px solid var(--border);
-    white-space: nowrap; z-index: 10;
-    cursor: pointer; user-select: none;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
   }
 
   thead th:hover { color: var(--text); }
 
+  /* Заморозка первой колонки — фикс для мобиле */
+  thead th:first-child,
+  tbody td:first-child {
+    position: -webkit-sticky;
+    position: sticky;
+    left: 0;
+    z-index: 3;
+  }
+
   thead th:first-child {
-    text-align: left; position: sticky; left: 0; z-index: 20;
-    background: var(--header-bg); min-width: 100px; max-width: 130px;
+    text-align: left;
+    background: var(--header-bg);
+    min-width: 110px;
+    max-width: 140px;
+    z-index: 4;
   }
 
   tbody tr {
@@ -158,20 +219,37 @@
 
   @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
-  td { padding: 9px 8px; text-align: right; font-size: 11px; white-space: nowrap; color: var(--text); }
-
-  td:first-child {
-    text-align: left; position: sticky; left: 0;
-    background: transparent; z-index: 5; font-size: 10px; color: #aaaacc;
-    max-width: 130px; overflow: hidden; text-overflow: ellipsis;
-    border-right: 1px solid var(--border);
+  td {
+    padding: 9px 8px;
+    text-align: right;
+    font-size: 11px;
+    white-space: nowrap;
+    color: var(--text);
   }
 
-  tbody tr.positive td:first-child { background: var(--row-positive); }
-  tbody tr.negative td:first-child { background: var(--row-negative); }
-  tbody tr:not(.positive):not(.negative) td:first-child { background: var(--bg); }
-  tbody tr.positive:hover td:first-child, tbody tr.positive:active td:first-child { background: var(--row-positive-hover); }
-  tbody tr.negative:hover td:first-child, tbody tr.negative:active td:first-child { background: var(--row-negative-hover); }
+  tbody td:first-child {
+    text-align: left;
+    font-size: 10px;
+    color: #aaaacc;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-right: 1px solid var(--border);
+    /* Цвет фона берём от строки */
+    background: var(--bg);
+  }
+
+  tbody tr.positive td:first-child { background: color-mix(in srgb, var(--row-positive) 100%, transparent); }
+  tbody tr.negative td:first-child { background: color-mix(in srgb, var(--row-negative) 100%, transparent); }
+
+  /* Fallback для браузеров без color-mix */
+  @supports not (background: color-mix(in srgb, red 50%, blue)) {
+    tbody tr.positive td:first-child { background: rgba(0, 255, 136, 0.06); }
+    tbody tr.negative td:first-child { background: rgba(255, 68, 102, 0.06); }
+    tbody tr:not(.positive):not(.negative) td:first-child { background: var(--bg); }
+    tbody tr.positive:hover td:first-child, tbody tr.positive:active td:first-child { background: rgba(0, 255, 136, 0.12); }
+    tbody tr.negative:hover td:first-child, tbody tr.negative:active td:first-child { background: rgba(255, 68, 102, 0.12); }
+  }
 
   .roi-pos { color: var(--positive); font-weight: 600; }
   .roi-neg { color: var(--negative); font-weight: 600; }
@@ -205,11 +283,6 @@
 
   .empty { padding: 40px; text-align: center; color: var(--muted); font-size: 11px; }
 
-  /* Специальный контейнер для скриншота */
-  #screenshot-target {
-    background: var(--bg);
-  }
-
   ::-webkit-scrollbar { height: 3px; width: 3px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
@@ -226,27 +299,42 @@
   </div>
   <div class="topbar-right">
     <div class="updated-time" id="updatedTime"></div>
-    <button class="save-btn" id="saveBtn" onclick="shareLink()">🔗 поделиться</button>
+    <button class="share-btn" id="shareBtn" onclick="shareLink()">🔗 поделиться</button>
   </div>
 </div>
 
-<div id="screenshot-target">
-  <div id="totalsStrip" class="totals-strip" style="display:none">
-    <div class="total-card"><div class="total-label">Spend</div><div class="total-value" id="t-spend">—</div></div>
-    <div class="total-card"><div class="total-label">Lids</div><div class="total-value" id="t-lids">—</div></div>
-    <div class="total-card"><div class="total-label">Dep</div><div class="total-value" id="t-dep">—</div></div>
-    <div class="total-card"><div class="total-label">Rev</div><div class="total-value rev" id="t-rev">—</div></div>
-    <div class="total-card"><div class="total-label">ROI</div><div class="total-value" id="t-roi">—</div></div>
-  </div>
-
-  <div id="main"></div>
+<div id="totalsStrip" class="totals-strip" style="display:none">
+  <div class="total-card"><div class="total-label">Spend</div><div class="total-value" id="t-spend">—</div></div>
+  <div class="total-card"><div class="total-label">Lids</div><div class="total-value" id="t-lids">—</div></div>
+  <div class="total-card"><div class="total-label">Dep</div><div class="total-value" id="t-dep">—</div></div>
+  <div class="total-card"><div class="total-label">Rev</div><div class="total-value rev" id="t-rev">—</div></div>
+  <div class="total-card"><div class="total-label">ROI</div><div class="total-value" id="t-roi">—</div></div>
 </div>
+
+<div class="filter-bar">
+  <input
+    class="filter-input"
+    id="filterInput"
+    type="text"
+    placeholder="🔍 фильтр по названию: it, bg, fr..."
+    oninput="onFilter(this.value)"
+    autocomplete="off"
+    autocorrect="off"
+    autocapitalize="off"
+    spellcheck="false"
+  >
+  <button class="filter-clear" id="filterClear" onclick="clearFilter()">✕</button>
+  <span class="filter-count" id="filterCount"></span>
+</div>
+
+<div id="main"></div>
 
 <script>
 const BASE = 'https://krisaze1.github.io/anfxcvietpqetsdghrwiutivjxdglqiwthidygzskqprotuvnzbdg/';
 let allData = [];
 let sortCol = 'Spend';
 let sortAsc = false;
+let filterText = '';
 let currentMeta = {};
 
 function getFilename() {
@@ -276,7 +364,7 @@ async function loadData(showSpinner) {
     document.getElementById('updatedTime').textContent = currentMeta.updated_at ? currentMeta.updated_at.slice(11, 16) : '';
 
     renderTotals(json.totals || {});
-    renderTable(allData);
+    renderTable();
 
   } catch(e) {
     if (showSpinner) {
@@ -303,14 +391,47 @@ function fmt(n) {
   return Number(n).toLocaleString('ru-RU');
 }
 
-function renderTable(data) {
+function onFilter(val) {
+  filterText = val.toLowerCase().trim();
+  document.getElementById('filterClear').style.display = filterText ? 'block' : 'none';
+  renderTable();
+}
+
+function clearFilter() {
+  filterText = '';
+  document.getElementById('filterInput').value = '';
+  document.getElementById('filterClear').style.display = 'none';
+  renderTable();
+}
+
+function renderTable() {
   const main = document.getElementById('main');
-  if (!data || data.length === 0) {
+  if (!allData || allData.length === 0) {
     main.innerHTML = '<div class="empty">нет данных за выбранный период</div>';
+    document.getElementById('filterCount').textContent = '';
     return;
   }
 
-  const sorted = [...data].sort((a, b) => {
+  // Фильтрация
+  const filtered = filterText
+    ? allData.filter(r => r['Creative'].toLowerCase().includes(filterText))
+    : allData;
+
+  // Счётчик
+  const countEl = document.getElementById('filterCount');
+  if (filterText) {
+    countEl.textContent = `${filtered.length} / ${allData.length}`;
+  } else {
+    countEl.textContent = `${allData.length}`;
+  }
+
+  if (filtered.length === 0) {
+    main.innerHTML = '<div class="empty">ничего не найдено</div>';
+    return;
+  }
+
+  // Сортировка
+  const sorted = [...filtered].sort((a, b) => {
     let av = a[sortCol], bv = b[sortCol];
     av = isNaN(av) ? String(av) : Number(av);
     bv = isNaN(bv) ? String(bv) : Number(bv);
@@ -344,8 +465,23 @@ function renderTable(data) {
     const roi = parseFloat(row['ROI']) || 0;
     const roiCls = roi >= 0 ? 'roi-pos' : 'roi-neg';
     const rowCls = row['Spend'] > 0 ? (roi >= 0 ? 'positive' : 'negative') : '';
-    html += `<tr class="${rowCls}" style="animation-delay:${i * 0.02}s">
-      <td title="${row['Creative']}">${row['Creative']}</td>
+
+    // Подсвечиваем совпадение в названии
+    let creativeName = row['Creative'];
+    if (filterText) {
+      const idx = creativeName.toLowerCase().indexOf(filterText);
+      if (idx !== -1) {
+        creativeName =
+          creativeName.slice(0, idx) +
+          `<mark style="background:rgba(0,255,136,0.3);color:var(--accent);border-radius:2px">` +
+          creativeName.slice(idx, idx + filterText.length) +
+          `</mark>` +
+          creativeName.slice(idx + filterText.length);
+      }
+    }
+
+    html += `<tr class="${rowCls}" style="animation-delay:${i * 0.015}s">
+      <td title="${row['Creative']}">${creativeName}</td>
       <td class="spend-val">${fmt(row['Spend'])}</td>
       <td>${row['Clicks'] || '—'}</td>
       <td>${row['Avg CPC'] || '—'}</td>
@@ -365,33 +501,23 @@ function renderTable(data) {
 function setSort(col) {
   if (sortCol === col) sortAsc = !sortAsc;
   else { sortCol = col; sortAsc = false; }
-  renderTable(allData);
+  renderTable();
 }
 
 function shareLink() {
-  const btn = document.getElementById('saveBtn');
+  const btn = document.getElementById('shareBtn');
   const url = window.location.href;
 
-  // Пробуем нативный шаринг (работает на мобильных)
   if (navigator.share) {
-    navigator.share({
-      title: '📊 Stats',
-      text: 'Таблица статистики',
-      url: url
-    });
+    navigator.share({ title: '📊 Stats', text: 'Таблица статистики', url });
     return;
   }
 
-  // Если нет нативного шаринга — копируем в буфер
   navigator.clipboard.writeText(url).then(() => {
     btn.textContent = '✅ скопировано';
     btn.classList.add('copied');
-    setTimeout(() => {
-      btn.textContent = '🔗 поделиться';
-      btn.classList.remove('copied');
-    }, 2000);
+    setTimeout(() => { btn.textContent = '🔗 поделиться'; btn.classList.remove('copied'); }, 2000);
   }).catch(() => {
-    // Fallback если clipboard не работает
     const el = document.createElement('textarea');
     el.value = url;
     document.body.appendChild(el);
@@ -400,10 +526,7 @@ function shareLink() {
     document.body.removeChild(el);
     btn.textContent = '✅ скопировано';
     btn.classList.add('copied');
-    setTimeout(() => {
-      btn.textContent = '🔗 поделиться';
-      btn.classList.remove('copied');
-    }, 2000);
+    setTimeout(() => { btn.textContent = '🔗 поделиться'; btn.classList.remove('copied'); }, 2000);
   });
 }
 
