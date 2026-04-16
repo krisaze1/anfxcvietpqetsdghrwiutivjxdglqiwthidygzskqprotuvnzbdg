@@ -2,44 +2,44 @@
   "meta": {
     "date_from": "2026-04-16",
     "date_to": "2026-04-16",
-    "updated_at": "2026-04-16 21:13:17",
+    "updated_at": "2026-04-16 21:15:17",
     "filename": "data_20260416_2110.json"
   },
   "totals": {
-    "Spend": 1578,
+    "Spend": 1579,
     "Clicks": 376,
     "Avg CPC": 4.2,
     "Lids": 161,
-    "CPL": 9.8,
-    "Reg": 67,
+    "CPL": 9.81,
+    "Reg": 68,
     "Dep": 7,
     "Revenue": 1001.32,
-    "ROI": "-36.54%"
+    "ROI": "-36.59%"
   },
   "data": [
     {
       "Creative": "sechickenugckroncardnosub1",
       "Spend": 842,
       "Clicks": 138,
-      "Avg CPC": 6.1,
+      "Avg CPC": 6.11,
       "Lids": 65,
       "CPL": 12.96,
       "Reg": 24,
       "Dep": 3,
       "Revenue": 600,
-      "ROI": "-28.77%"
+      "ROI": "-28.80%"
     },
     {
       "Creative": "bgchickenugccardnosubzoom1",
-      "Spend": 321,
+      "Spend": 322,
       "Clicks": 123,
-      "Avg CPC": 2.61,
+      "Avg CPC": 2.62,
       "Lids": 53,
-      "CPL": 6.06,
-      "Reg": 25,
+      "CPL": 6.08,
+      "Reg": 26,
       "Dep": 4,
       "Revenue": 401.32,
-      "ROI": "24.93%"
+      "ROI": "24.59%"
     },
     {
       "Creative": "eschickenugcdep5europasspcardnosub1",
@@ -57,7 +57,7 @@
       "Creative": "bgchickenugccardnosub1",
       "Spend": 196,
       "Clicks": 83,
-      "Avg CPC": 2.36,
+      "Avg CPC": 2.37,
       "Lids": 33,
       "CPL": 5.95,
       "Reg": 14,
