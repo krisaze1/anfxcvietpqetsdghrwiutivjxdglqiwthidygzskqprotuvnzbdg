@@ -191,11 +191,23 @@
 <div id="main"></div>
 
 <script>
-const BASE = 'https://krisaze1.github.io/anfxcvietpqetsdghrwiutivjxdglqiwthidygzskqprotuvnzbdg/';
+// GitHub API — всегда свежие данные без кэша
+const REPO = 'krisaze1/anfxcvietpqetsdghrwiutivjxdglqiwthidygzskqprotuvnzbdg';
+const API_BASE = 'https://api.github.com/repos/' + REPO + '/contents/';
+
 let allData = [];
 let sortCol = 'Spend';
 let sortAsc = false;
 let lastFilename = null;
+
+async function fetchFromGitHub(filename) {
+  const resp = await fetch(API_BASE + filename, {
+    headers: { 'Accept': 'application/vnd.github.v3.raw' },
+    cache: 'no-store'
+  });
+  if (!resp.ok) throw new Error(filename + ' not found (' + resp.status + ')');
+  return await resp.json();
+}
 
 async function loadData(showSpinner) {
   const main = document.getElementById('main');
@@ -205,20 +217,16 @@ async function loadData(showSpinner) {
   }
 
   try {
-    // Сначала получаем latest.json — там имя свежего файла
-    const latestResp = await fetch(BASE + 'latest.json?t=' + Date.now(), { cache: 'no-store' });
-    if (!latestResp.ok) throw new Error('latest.json not found');
-    const latest = await latestResp.json();
+    // Получаем latest.json через GitHub API — всегда свежий
+    const latest = await fetchFromGitHub('latest.json');
     const filename = latest.filename;
 
-    // Если файл не изменился — не перегружаем таблицу
+    // Если файл не изменился — не перерисовываем
     if (!showSpinner && filename === lastFilename) return;
     lastFilename = filename;
 
-    // Загружаем сам файл данных (всегда новый т.к. имя уникальное)
-    const dataResp = await fetch(BASE + filename, { cache: 'no-store' });
-    if (!dataResp.ok) throw new Error('data file not found');
-    const json = await dataResp.json();
+    // Загружаем сам файл данных
+    const json = await fetchFromGitHub(filename);
 
     allData = json.data || [];
     const meta = json.meta || {};
