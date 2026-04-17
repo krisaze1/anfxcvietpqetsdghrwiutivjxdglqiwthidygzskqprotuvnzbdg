@@ -2,28 +2,28 @@
   "meta": {
     "date_from": "2026-04-17",
     "date_to": "2026-04-17",
-    "updated_at": "2026-04-17 10:30:49",
-    "filename": "data_20260417_103049.json"
+    "updated_at": "2026-04-17 11:00:40",
+    "filename": "data_20260417_110040.json"
   },
   "totals": {
-    "Spend": 162,
-    "Clicks": 56,
-    "Avg CPC": 2.89,
+    "Spend": 184,
+    "Clicks": 59,
+    "Avg CPC": 3.12,
     "Lids": 18,
-    "CPL": 9.0,
+    "CPL": 10.22,
     "Reg": 13,
     "Dep": 1,
     "Revenue": 100.18,
-    "ROI": "-38.16%"
+    "ROI": "-45.55%"
   },
   "data": [
     {
       "Creative": "bgchickenugccardnosubzoom1",
-      "Spend": 159,
-      "Clicks": 55,
-      "Avg CPC": 2.9,
+      "Spend": 179,
+      "Clicks": 57,
+      "Avg CPC": 3.15,
       "Lids": 18,
-      "CPL": 8.87,
+      "CPL": 9.97,
       "Reg": 11,
       "Dep": 0,
       "Revenue": 0,
@@ -31,9 +31,9 @@
     },
     {
       "Creative": "bgchickenugccardnosub1",
-      "Spend": 3,
-      "Clicks": 1,
-      "Avg CPC": 3.41,
+      "Spend": 5,
+      "Clicks": 2,
+      "Avg CPC": 2.75,
       "Lids": 0,
       "CPL": 0,
       "Reg": 0,
