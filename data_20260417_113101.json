@@ -2,28 +2,28 @@
   "meta": {
     "date_from": "2026-04-17",
     "date_to": "2026-04-17",
-    "updated_at": "2026-04-17 11:00:40",
-    "filename": "data_20260417_110040.json"
+    "updated_at": "2026-04-17 11:31:01",
+    "filename": "data_20260417_113101.json"
   },
   "totals": {
-    "Spend": 184,
-    "Clicks": 59,
-    "Avg CPC": 3.12,
-    "Lids": 18,
-    "CPL": 10.22,
+    "Spend": 197,
+    "Clicks": 60,
+    "Avg CPC": 3.28,
+    "Lids": 22,
+    "CPL": 8.95,
     "Reg": 13,
     "Dep": 1,
     "Revenue": 100.18,
-    "ROI": "-45.55%"
+    "ROI": "-49.15%"
   },
   "data": [
     {
       "Creative": "bgchickenugccardnosubzoom1",
-      "Spend": 179,
-      "Clicks": 57,
-      "Avg CPC": 3.15,
+      "Spend": 190,
+      "Clicks": 58,
+      "Avg CPC": 3.29,
       "Lids": 18,
-      "CPL": 9.97,
+      "CPL": 10.6,
       "Reg": 11,
       "Dep": 0,
       "Revenue": 0,
@@ -31,11 +31,23 @@
     },
     {
       "Creative": "bgchickenugccardnosub1",
-      "Spend": 5,
+      "Spend": 6,
       "Clicks": 2,
-      "Avg CPC": 2.75,
-      "Lids": 0,
-      "CPL": 0,
+      "Avg CPC": 3.48,
+      "Lids": 2,
+      "CPL": 3.48,
+      "Reg": 0,
+      "Dep": 0,
+      "Revenue": 0,
+      "ROI": "-100.00%"
+    },
+    {
+      "Creative": "itchickenugclasteuro1",
+      "Spend": 1,
+      "Clicks": 0,
+      "Avg CPC": 0,
+      "Lids": 2,
+      "CPL": 0.82,
       "Reg": 0,
       "Dep": 0,
       "Revenue": 0,
