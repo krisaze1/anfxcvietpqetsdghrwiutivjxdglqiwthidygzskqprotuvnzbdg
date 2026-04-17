@@ -2,38 +2,38 @@
   "meta": {
     "date_from": "2026-04-17",
     "date_to": "2026-04-17",
-    "updated_at": "2026-04-17 06:12:35",
-    "filename": "data_20260417_061235.json"
+    "updated_at": "2026-04-17 10:01:02",
+    "filename": "data_20260417_100102.json"
   },
   "totals": {
-    "Spend": 62,
-    "Clicks": 31,
-    "Avg CPC": 2.0,
-    "Lids": 9,
-    "CPL": 6.89,
-    "Reg": 6,
+    "Spend": 152,
+    "Clicks": 55,
+    "Avg CPC": 2.76,
+    "Lids": 18,
+    "CPL": 8.44,
+    "Reg": 13,
     "Dep": 1,
     "Revenue": 100.18,
-    "ROI": "61.58%"
+    "ROI": "-34.09%"
   },
   "data": [
     {
       "Creative": "bgchickenugccardnosubzoom1",
-      "Spend": 62,
-      "Clicks": 31,
-      "Avg CPC": 2.03,
-      "Lids": 9,
-      "CPL": 6.99,
-      "Reg": 5,
+      "Spend": 150,
+      "Clicks": 54,
+      "Avg CPC": 2.79,
+      "Lids": 18,
+      "CPL": 8.36,
+      "Reg": 11,
       "Dep": 0,
       "Revenue": 0,
       "ROI": "-100.00%"
     },
     {
       "Creative": "bgchickenugccardnosub1",
-      "Spend": 0,
-      "Clicks": 0,
-      "Avg CPC": 0,
+      "Spend": 2,
+      "Clicks": 1,
+      "Avg CPC": 2.82,
       "Lids": 0,
       "CPL": 0,
       "Reg": 0,
@@ -51,6 +51,18 @@
       "Reg": 1,
       "Dep": 1,
       "Revenue": 100.18,
+      "ROI": "0.00%"
+    },
+    {
+      "Creative": "не нашли",
+      "Spend": 0,
+      "Clicks": 0,
+      "Avg CPC": 0,
+      "Lids": 0,
+      "CPL": 0,
+      "Reg": 1,
+      "Dep": 0,
+      "Revenue": 0,
       "ROI": "0.00%"
     }
   ]
