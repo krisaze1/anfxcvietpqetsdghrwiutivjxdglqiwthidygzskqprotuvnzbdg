@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "date_from": "2026-04-21",
+    "date_to": "2026-04-21",
+    "updated_at": "2026-04-21 11:50:34",
+    "filename": "data_20260421_115034.json"
+  },
+  "totals": {
+    "Spend": 9,
+    "Clicks": 1,
+    "Avg CPC": 9.0,
+    "Lids": 4,
+    "CPL": 2.25,
+    "Reg": 0,
+    "Dep": 0,
+    "Revenue": 0.0,
+    "ROI": "-100.00%"
+  },
+  "data": [
+    {
+      "Creative": "nlchickenugcaskcard1",
+      "Spend": 9,
+      "Clicks": 1,
+      "Avg CPC": 9.71,
+      "Lids": 0,
+      "CPL": 0,
+      "Reg": 0,
+      "Dep": 0,
+      "Revenue": 0,
+      "ROI": "-100.00%"
+    },
+    {
+      "Creative": "не нашли",
+      "Spend": 0,
+      "Clicks": 0,
+      "Avg CPC": 0,
+      "Lids": 4,
+      "CPL": 0.0,
+      "Reg": 0,
+      "Dep": 0,
+      "Revenue": 0,
+      "ROI": "0.00%"
+    }
+  ]
+}
