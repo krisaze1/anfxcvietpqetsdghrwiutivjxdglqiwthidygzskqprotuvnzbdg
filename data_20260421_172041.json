@@ -2,15 +2,15 @@
   "meta": {
     "date_from": "2026-04-21",
     "date_to": "2026-04-21",
-    "updated_at": "2026-04-21 16:40:41",
-    "filename": "data_20260421_164041.json"
+    "updated_at": "2026-04-21 17:20:41",
+    "filename": "data_20260421_172041.json"
   },
   "totals": {
-    "Spend": 155,
+    "Spend": 157,
     "Clicks": 29,
-    "Avg CPC": 5.34,
+    "Avg CPC": 5.41,
     "Lids": 7,
-    "CPL": 22.14,
+    "CPL": 22.43,
     "Reg": 1,
     "Dep": 0,
     "Revenue": 0.0,
@@ -21,7 +21,7 @@
       "Creative": "nlchickenugcaskcard1",
       "Spend": 78,
       "Clicks": 13,
-      "Avg CPC": 6.02,
+      "Avg CPC": 6.05,
       "Lids": 0,
       "CPL": 0,
       "Reg": 0,
@@ -33,7 +33,7 @@
       "Creative": "itchickenugcaskcard18",
       "Spend": 37,
       "Clicks": 13,
-      "Avg CPC": 2.86,
+      "Avg CPC": 2.88,
       "Lids": 0,
       "CPL": 0,
       "Reg": 0,
@@ -43,9 +43,9 @@
     },
     {
       "Creative": "itchickenugcaskcard17",
-      "Spend": 35,
+      "Spend": 37,
       "Clicks": 3,
-      "Avg CPC": 11.96,
+      "Avg CPC": 12.62,
       "Lids": 0,
       "CPL": 0,
       "Reg": 0,
@@ -76,6 +76,18 @@
       "Dep": 0,
       "Revenue": 0,
       "ROI": "0.00%"
+    },
+    {
+      "Creative": "itchickenugcaskcard16",
+      "Spend": 0,
+      "Clicks": 0,
+      "Avg CPC": 0,
+      "Lids": 0,
+      "CPL": 0,
+      "Reg": 0,
+      "Dep": 0,
+      "Revenue": 0,
+      "ROI": "-100.00%"
     },
     {
       "Creative": "itchickenugcaskcard13",
