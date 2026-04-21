@@ -1,0 +1,33 @@
+{
+  "meta": {
+    "date_from": "2026-04-21",
+    "date_to": "2026-04-21",
+    "updated_at": "2026-04-21 11:11:30",
+    "filename": "data_20260421_111130.json"
+  },
+  "totals": {
+    "Spend": 0,
+    "Clicks": 0,
+    "Avg CPC": 0,
+    "Lids": 4,
+    "CPL": 0.0,
+    "Reg": 0,
+    "Dep": 0,
+    "Revenue": 0.0,
+    "ROI": "0.00%"
+  },
+  "data": [
+    {
+      "Creative": "не нашли",
+      "Spend": 0,
+      "Clicks": 0,
+      "Avg CPC": 0,
+      "Lids": 4,
+      "CPL": 0.0,
+      "Reg": 0,
+      "Dep": 0,
+      "Revenue": 0,
+      "ROI": "0.00%"
+    }
+  ]
+}
