@@ -2,51 +2,51 @@
   "meta": {
     "date_from": "2026-04-21",
     "date_to": "2026-04-23",
-    "updated_at": "2026-04-23 01:13:09"
+    "updated_at": "2026-04-23 01:57:11"
   },
   "totals": {
-    "Spend": 777,
-    "Clicks": 190,
-    "Avg CPC": 4.09,
-    "Lids": 175,
-    "CPL": 4.44,
-    "Reg": 69,
+    "Spend": 819,
+    "Clicks": 208,
+    "Avg CPC": 3.94,
+    "Lids": 182,
+    "CPL": 4.5,
+    "Reg": 72,
     "Dep": 11,
     "Revenue": 1890.19,
-    "ROI": "143.27%"
+    "ROI": "130.79%"
   },
   "creatives": [
     {
       "Creative": "itchickenugcaskcard18",
-      "Spend": 412,
-      "Clicks": 127,
-      "Avg CPC": 3.25,
-      "Lids": 51,
-      "CPL": 8.09,
-      "Reg": 30,
+      "Spend": 454,
+      "Clicks": 145,
+      "Avg CPC": 3.14,
+      "Lids": 56,
+      "CPL": 8.12,
+      "Reg": 33,
       "Dep": 6,
       "Revenue": 1056.45,
-      "ROI": "156.19%"
+      "ROI": "132.22%"
     },
     {
       "Creative": "itchickenugcaskcard13",
       "Spend": 122,
       "Clicks": 27,
-      "Avg CPC": 4.53,
-      "Lids": 31,
-      "CPL": 3.94,
+      "Avg CPC": 4.54,
+      "Lids": 33,
+      "CPL": 3.71,
       "Reg": 14,
       "Dep": 2,
       "Revenue": 352.49,
-      "ROI": "188.38%"
+      "ROI": "187.58%"
     },
     {
       "Creative": "itchickenugcaskcard16",
       "Spend": 89,
       "Clicks": 11,
-      "Avg CPC": 8.14,
+      "Avg CPC": 8.16,
       "Lids": 13,
-      "CPL": 6.89,
+      "CPL": 6.9,
       "Reg": 7,
       "Dep": 0,
       "Revenue": 0,
@@ -56,13 +56,13 @@
       "Creative": "itchickenugcaskcard15",
       "Spend": 66,
       "Clicks": 21,
-      "Avg CPC": 3.17,
+      "Avg CPC": 3.18,
       "Lids": 28,
       "CPL": 2.38,
       "Reg": 10,
       "Dep": 1,
       "Revenue": 176.08,
-      "ROI": "164.31%"
+      "ROI": "163.91%"
     },
     {
       "Creative": "itchickenugcaskcard14",
@@ -154,18 +154,20 @@
       {
         "name": "skak_2204_pwadroid_IT_682774260501589itchickenugcaskcard18_3",
         "budget": 899.0,
-        "spend": 302,
-        "leads": 33,
+        "spend": 345,
+        "leads": 36,
         "dep": 3,
-        "reg": 24
+        "reg": 27,
+        "revenue": 528.21
       },
       {
         "name": "skak_2204_pwadroid_IT_682774260501589itchickenugcaskcard13_3",
         "budget": 399.0,
-        "spend": 77,
+        "spend": 78,
         "leads": 7,
         "dep": 0,
-        "reg": 2
+        "reg": 2,
+        "revenue": 0.0
       },
       {
         "name": "skak_2204_pwadroid_IT_682774260501589itchickenugcaskcard18_4",
@@ -173,7 +175,8 @@
         "spend": 29,
         "leads": 1,
         "dep": 1,
-        "reg": 1
+        "reg": 1,
+        "revenue": 176.08
       },
       {
         "name": "skak_2204_pwadroid_IT_682774260501589itchickenugcaskcard15_3",
@@ -181,7 +184,8 @@
         "spend": 22,
         "leads": 2,
         "dep": 0,
-        "reg": 0
+        "reg": 0,
+        "revenue": 0.0
       },
       {
         "name": "skak_2204_pwadroid_IT_682774260501589itchickenugcaskcard16_3",
@@ -189,7 +193,8 @@
         "spend": 20,
         "leads": 0,
         "dep": 0,
-        "reg": 0
+        "reg": 0,
+        "revenue": 0.0
       },
       {
         "name": "skak_2204_pwadroid_IT_682774260501589itchickenugcaskcard16_5",
@@ -197,7 +202,8 @@
         "spend": 18,
         "leads": 0,
         "dep": 0,
-        "reg": 1
+        "reg": 1,
+        "revenue": 0.0
       },
       {
         "name": "skak_2204_pwadroid_IT_682774260501589itchickenugcaskcard16_1",
@@ -205,7 +211,8 @@
         "spend": 18,
         "leads": 1,
         "dep": 0,
-        "reg": 1
+        "reg": 1,
+        "revenue": 0.0
       },
       {
         "name": "skak_2204_pwadroid_IT_682774260501589itchickenugcaskcard16_2",
@@ -213,7 +220,8 @@
         "spend": 17,
         "leads": 0,
         "dep": 0,
-        "reg": 1
+        "reg": 1,
+        "revenue": 0.0
       },
       {
         "name": "skak_2204_pwadroid_IT_682774260501589itchickenugcaskcard15_5",
@@ -221,7 +229,8 @@
         "spend": 17,
         "leads": 1,
         "dep": 0,
-        "reg": 1
+        "reg": 1,
+        "revenue": 0.0
       },
       {
         "name": "skak_2204_pwadroid_IT_682774260501589itchickenugcaskcard13_1",
@@ -229,7 +238,8 @@
         "spend": 16,
         "leads": 1,
         "dep": 0,
-        "reg": 1
+        "reg": 1,
+        "revenue": 0.0
       },
       {
         "name": "skak_2104_pwadroid_IT_682774260501589itchickenugcaskcard17_1",
@@ -237,7 +247,8 @@
         "spend": 15,
         "leads": 0,
         "dep": 0,
-        "reg": 0
+        "reg": 0,
+        "revenue": 0.0
       },
       {
         "name": "skak_2204_pwadroid_IT_682774260501589itchickenugcaskcard18_5",
@@ -245,7 +256,8 @@
         "spend": 14,
         "leads": 0,
         "dep": 0,
-        "reg": 0
+        "reg": 0,
+        "revenue": 0.0
       },
       {
         "name": "skak_2204_pwadroid_IT_682774260501589itchickenugcaskcard13_5",
@@ -253,7 +265,8 @@
         "spend": 14,
         "leads": 0,
         "dep": 0,
-        "reg": 0
+        "reg": 0,
+        "revenue": 0.0
       },
       {
         "name": "skak_2104_pwadroid_IT_682774260501589itchickenugcaskcard17_3",
@@ -261,7 +274,8 @@
         "spend": 14,
         "leads": 0,
         "dep": 0,
-        "reg": 0
+        "reg": 0,
+        "revenue": 0.0
       },
       {
         "name": "skak_2204_pwadroid_IT_682774260501589itchickenugcaskcard18_2",
@@ -269,7 +283,8 @@
         "spend": 13,
         "leads": 0,
         "dep": 0,
-        "reg": 0
+        "reg": 0,
+        "revenue": 0.0
       },
       {
         "name": "skak_2204_pwadroid_IT_682774260501589itchickenugcaskcard16_4",
@@ -277,7 +292,8 @@
         "spend": 13,
         "leads": 0,
         "dep": 0,
-        "reg": 0
+        "reg": 0,
+        "revenue": 0.0
       },
       {
         "name": "skak_2204_pwadroid_IT_682774260501589itchickenugcaskcard15_4",
@@ -285,7 +301,8 @@
         "spend": 13,
         "leads": 0,
         "dep": 0,
-        "reg": 0
+        "reg": 0,
+        "revenue": 0.0
       },
       {
         "name": "skak_2204_pwadroid_IT_682774260501589itchickenugcaskcard15_1",
@@ -293,7 +310,8 @@
         "spend": 13,
         "leads": 0,
         "dep": 0,
-        "reg": 0
+        "reg": 0,
+        "revenue": 0.0
       },
       {
         "name": "skak_2204_pwadroid_IT_682774260501589itchickenugcaskcard14_5",
@@ -301,7 +319,8 @@
         "spend": 13,
         "leads": 0,
         "dep": 0,
-        "reg": 0
+        "reg": 0,
+        "revenue": 0.0
       },
       {
         "name": "skak_2204_pwadroid_IT_682774260501589itchickenugcaskcard13_2",
@@ -309,7 +328,8 @@
         "spend": 13,
         "leads": 0,
         "dep": 0,
-        "reg": 0
+        "reg": 0,
+        "revenue": 0.0
       },
       {
         "name": "skak_2104_pwadroid_IT_682774260501589itchickenugcaskcard18_3",
@@ -317,7 +337,8 @@
         "spend": 13,
         "leads": 0,
         "dep": 3,
-        "reg": 24
+        "reg": 27,
+        "revenue": 528.21
       },
       {
         "name": "skak_2104_pwadroid_IT_682774260501589itchickenugcaskcard18_2",
@@ -325,7 +346,8 @@
         "spend": 13,
         "leads": 0,
         "dep": 0,
-        "reg": 0
+        "reg": 0,
+        "revenue": 0.0
       },
       {
         "name": "skak_2104_pwadroid_IT_682774260501589itchickenugcaskcard17_2",
@@ -333,7 +355,8 @@
         "spend": 13,
         "leads": 0,
         "dep": 0,
-        "reg": 0
+        "reg": 0,
+        "revenue": 0.0
       },
       {
         "name": "skak_2204_pwadroid_IT_682774260501589itchickenugcaskcard18_1",
@@ -341,7 +364,8 @@
         "spend": 12,
         "leads": 1,
         "dep": 1,
-        "reg": 1
+        "reg": 1,
+        "revenue": 176.08
       },
       {
         "name": "skak_2104_pwadroid_IT_682774260501589itchickenugcaskcard18_1",
@@ -349,7 +373,8 @@
         "spend": 12,
         "leads": 0,
         "dep": 1,
-        "reg": 1
+        "reg": 1,
+        "revenue": 176.08
       },
       {
         "name": "skak_2204_pwadroid_IT_682774260501589itchickenugcaskcard14_2",
@@ -357,7 +382,8 @@
         "spend": 9,
         "leads": 0,
         "dep": 0,
-        "reg": 0
+        "reg": 0,
+        "revenue": 0.0
       },
       {
         "name": "skak_2204_pwadroid_IT_682774260501589itchickenugcaskcard14_1",
@@ -365,7 +391,8 @@
         "spend": 8,
         "leads": 0,
         "dep": 0,
-        "reg": 0
+        "reg": 0,
+        "revenue": 0.0
       },
       {
         "name": "skak_2204_pwadroid_IT_682774260501589itchickenugcaskcard14_4",
@@ -373,7 +400,8 @@
         "spend": 7,
         "leads": 0,
         "dep": 0,
-        "reg": 0
+        "reg": 0,
+        "revenue": 0.0
       },
       {
         "name": "skak_2204_pwadroid_IT_682774260501589itchickenugcaskcard14_3",
@@ -381,7 +409,8 @@
         "spend": 7,
         "leads": 0,
         "dep": 0,
-        "reg": 0
+        "reg": 0,
+        "revenue": 0.0
       }
     ]
   }
