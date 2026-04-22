@@ -3,321 +3,296 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Stats</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Unbounded:wght@400;700&display=swap" rel="stylesheet">
+<title>Stats Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0f;
-    --surface: #111118;
-    --border: #1e1e2e;
-    --accent: #00ff88;
-    --accent2: #ff4466;
-    --accent3: #ffaa00;
-    --text: #e0e0f0;
-    --muted: #555570;
-    --positive: #00ff88;
-    --negative: #ff4466;
-    --header-bg: #0d0d1a;
-    --row-positive: rgba(0, 255, 136, 0.06);
-    --row-negative: rgba(255, 68, 102, 0.06);
-    --row-positive-hover: rgba(0, 255, 136, 0.12);
-    --row-negative-hover: rgba(255, 68, 102, 0.12);
-    --group-header: #0f0f1f;
+    /* Основная палитра: глубокие и чистые темные тона */
+    --bg: #09090b;
+    --surface: #121214;
+    --surface-hover: #18181b;
+    --border: #27272a;
+    
+    /* Текст */
+    --text-main: #f4f4f5;
+    --text-muted: #a1a1aa;
+    
+    /* Акценты (сдержанные, не "кричащие") */
+    --accent: #ffffff;
+    --positive: #10b981; /* Изумрудный */
+    --negative: #ef4444; /* Коралловый */
+    --brand: #3b82f6;    /* Спокойный синий */
+    
+    /* Фоны для строк */
+    --row-positive: rgba(16, 185, 129, 0.04);
+    --row-negative: rgba(239, 68, 68, 0.04);
+    --row-positive-hover: rgba(16, 185, 129, 0.08);
+    --row-negative-hover: rgba(239, 68, 68, 0.08);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
     background: var(--bg);
-    color: var(--text);
-    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-main);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 12px;
     overflow-x: hidden;
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
   }
 
   /* ТОПБАР */
   .topbar {
     position: sticky; top: 0; z-index: 100;
-    background: var(--header-bg);
+    background: rgba(9, 9, 11, 0.85);
     border-bottom: 1px solid var(--border);
-    padding: 10px 14px;
+    padding: 12px 16px;
     display: flex; align-items: center; justify-content: space-between;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 
-  .topbar-left { display: flex; flex-direction: column; gap: 2px; }
+  .topbar-left { display: flex; flex-direction: column; gap: 4px; }
 
   .topbar-title {
-    font-family: 'Unbounded', sans-serif;
-    font-size: 13px; font-weight: 700;
-    color: var(--accent); letter-spacing: 0.05em;
-    display: flex; align-items: center; gap: 6px;
+    font-size: 14px; font-weight: 600;
+    color: var(--text-main); letter-spacing: 0.02em;
+    display: flex; align-items: center; gap: 8px;
   }
 
-  .topbar-date { font-size: 10px; color: var(--muted); }
+  .topbar-date { font-size: 11px; color: var(--text-muted); font-weight: 500;}
 
   .live-badge {
-    display: inline-block; background: var(--accent); color: var(--bg);
-    font-size: 8px; padding: 2px 5px; border-radius: 3px; font-weight: 700;
-    animation: pulse 1.5s ease-in-out infinite;
+    display: flex; align-items: center; gap: 4px;
+    background: rgba(16, 185, 129, 0.1); 
+    color: var(--positive);
+    font-size: 9px; padding: 2px 6px; border-radius: 4px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  
+  .live-badge::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--positive);
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 
-  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-  .topbar-right { display: flex; align-items: center; gap: 8px; }
-  .updated-time { font-size: 9px; color: var(--muted); }
+  .topbar-right { display: flex; align-items: center; gap: 12px; }
+  .updated-time { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); }
 
   .share-btn {
-    background: none; border: 1px solid var(--muted); color: var(--muted);
-    padding: 4px 8px; border-radius: 4px;
-    font-family: 'JetBrains Mono', monospace; font-size: 9px;
-    cursor: pointer; transition: all 0.2s; white-space: nowrap;
+    background: var(--surface); border: 1px solid var(--border); color: var(--text-main);
+    padding: 6px 12px; border-radius: 6px;
+    font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500;
+    cursor: pointer; transition: all 0.2s ease; white-space: nowrap;
+    display: flex; align-items: center; gap: 6px;
   }
-  .share-btn:active, .share-btn:hover, .share-btn.copied { border-color: var(--accent); color: var(--accent); }
+  .share-btn:hover { background: var(--surface-hover); border-color: var(--text-muted); }
+  .share-btn:active, .share-btn.copied { background: var(--text-main); color: var(--bg); border-color: var(--text-main); }
 
   /* ТОТАЛЫ */
   .totals-strip {
-    display: grid; grid-template-columns: repeat(5, 1fr);
-    gap: 1px; background: var(--border); border-bottom: 2px solid var(--accent);
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    gap: 8px; padding: 16px; background: var(--bg);
   }
 
-  .total-card { background: var(--surface); padding: 8px 6px; text-align: center; }
-  .total-label { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; }
-  .total-value { font-size: 13px; font-weight: 700; color: var(--accent); }
-  .total-value.rev { color: var(--accent3); }
+  .total-card { 
+    background: var(--surface); 
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px; 
+    display: flex; flex-direction: column; gap: 4px;
+    transition: transform 0.2s ease;
+  }
+  .total-card:hover { border-color: #3f3f46; }
+  
+  .total-label { font-size: 10px; color: var(--text-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+  .total-value { font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 600; color: var(--text-main); }
+  
   .total-value.roi-pos { color: var(--positive); }
   .total-value.roi-neg { color: var(--negative); }
 
   /* ВКЛАДКИ */
   .tabs {
-    display: flex; background: var(--surface);
+    display: flex; padding: 0 16px;
     border-bottom: 1px solid var(--border);
+    gap: 16px;
   }
 
   .tab {
-    flex: 1; padding: 10px 0; text-align: center;
-    font-size: 11px; color: var(--muted);
-    cursor: pointer; transition: all 0.2s;
-    border-bottom: 2px solid transparent;
-    user-select: none;
+    padding: 12px 0; font-size: 12px; font-weight: 500; color: var(--text-muted);
+    cursor: pointer; transition: all 0.2s ease;
+    border-bottom: 2px solid transparent; user-select: none;
+    display: flex; align-items: center; gap: 6px;
   }
 
-  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--text-main); border-bottom-color: var(--text-main); }
+  .tab:hover:not(.active) { color: #d4d4d8; }
 
   /* ФИЛЬТР */
   .filter-bar {
-    padding: 8px 14px; background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; gap: 8px;
+    padding: 12px 16px; background: var(--bg);
+    display: flex; align-items: center; gap: 12px;
   }
 
   .filter-input {
-    flex: 1; background: var(--bg); border: 1px solid var(--border);
-    color: var(--text); font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; padding: 6px 10px; border-radius: 4px;
-    outline: none; transition: border-color 0.2s;
+    flex: 1; background: var(--surface); border: 1px solid var(--border);
+    color: var(--text-main); font-family: 'Inter', sans-serif;
+    font-size: 12px; padding: 8px 12px; border-radius: 6px;
+    outline: none; transition: all 0.2s ease;
   }
 
-  .filter-input:focus { border-color: var(--accent); }
-  .filter-input::placeholder { color: var(--muted); }
+  .filter-input:focus { border-color: #52525b; background: #18181b; }
+  .filter-input::placeholder { color: var(--text-muted); }
 
   .filter-clear {
-    background: none; border: none; color: var(--muted);
-    font-size: 14px; cursor: pointer; padding: 0 4px; display: none;
+    background: none; border: none; color: var(--text-muted);
+    font-size: 16px; cursor: pointer; padding: 0 4px; display: none;
+    transition: color 0.2s ease;
   }
+  .filter-clear:hover { color: var(--text-main); }
+  .filter-count { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); white-space: nowrap; }
 
-  .filter-count { font-size: 9px; color: var(--muted); white-space: nowrap; }
-
-  /* ТАБЛИЦА КРЕАТИВОВ */
-  .table-wrapper {
-    overflow-x: auto; -webkit-overflow-scrolling: touch; position: relative;
-  }
-
-  table { width: 100%; border-collapse: collapse; min-width: 620px; isolation: isolate; }
+  /* ТАБЛИЦА */
+  .table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; position: relative; padding-bottom: 20px;}
+  table { width: 100%; border-collapse: collapse; min-width: 680px; text-align: right; }
+  
   thead { position: relative; z-index: 2; }
-
   thead th {
-    background: var(--header-bg); color: var(--muted);
-    font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em;
-    padding: 8px; text-align: right;
-    border-bottom: 1px solid var(--border);
-    white-space: nowrap; cursor: pointer; user-select: none;
+    background: var(--bg); color: var(--text-muted);
+    font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 12px 10px; border-bottom: 1px solid var(--border);
+    white-space: nowrap; cursor: pointer; user-select: none; transition: color 0.2s ease;
   }
+  thead th:hover { color: var(--text-main); }
 
-  thead th:hover { color: var(--text); }
+  thead th:first-child, tbody td:first-child { position: -webkit-sticky; position: sticky; left: 0; z-index: 3; }
+  thead th:first-child { text-align: left; background: var(--bg); min-width: 140px; z-index: 4; }
 
-  thead th:first-child, tbody td:first-child {
-    position: -webkit-sticky; position: sticky; left: 0; z-index: 3;
-  }
-
-  thead th:first-child {
-    text-align: left; background: var(--header-bg);
-    min-width: 110px; max-width: 140px; z-index: 4;
-  }
-
-  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; animation: fadeIn 0.3s ease both; }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.2s ease; animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  
   tbody tr.positive { background: var(--row-positive); }
   tbody tr.negative { background: var(--row-negative); }
-  tbody tr.positive:hover, tbody tr.positive:active { background: var(--row-positive-hover); }
-  tbody tr.negative:hover, tbody tr.negative:active { background: var(--row-negative-hover); }
-  tbody tr:not(.positive):not(.negative):hover,
-  tbody tr:not(.positive):not(.negative):active { background: #111120; }
+  
+  tbody tr:hover { background: var(--surface); }
+  tbody tr.positive:hover { background: var(--row-positive-hover); }
+  tbody tr.negative:hover { background: var(--row-negative-hover); }
 
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-  td { padding: 9px 8px; text-align: right; font-size: 11px; white-space: nowrap; color: var(--text); }
+  td { 
+    padding: 12px 10px; font-family: 'JetBrains Mono', monospace; 
+    font-size: 11px; white-space: nowrap; color: var(--text-main); 
+  }
 
   tbody td:first-child {
-    text-align: left; font-size: 10px; color: #aaaacc;
-    max-width: 140px; overflow: hidden; text-overflow: ellipsis;
-    border-right: 1px solid var(--border); background: var(--bg);
+    font-family: 'Inter', sans-serif; text-align: left; font-size: 11px; font-weight: 500;
+    max-width: 160px; overflow: hidden; text-overflow: ellipsis;
+    border-right: 1px solid var(--border); background: var(--bg); color: #d4d4d8;
   }
 
-  @supports not (background: color-mix(in srgb, red 50%, blue)) {
-    tbody tr.positive td:first-child { background: rgba(0, 255, 136, 0.06); }
-    tbody tr.negative td:first-child { background: rgba(255, 68, 102, 0.06); }
-    tbody tr:not(.positive):not(.negative) td:first-child { background: var(--bg); }
-    tbody tr.positive:hover td:first-child { background: rgba(0, 255, 136, 0.12); }
-    tbody tr.negative:hover td:first-child { background: rgba(255, 68, 102, 0.12); }
-  }
+  /* Исправление sticky колонки для hover-эффектов */
+  tbody tr.positive td:first-child { background: #0c1512; } /* Смесь bg и row-positive */
+  tbody tr.negative td:first-child { background: #160d10; } /* Смесь bg и row-negative */
+  tbody tr:hover td:first-child { background: var(--surface); }
+  tbody tr.positive:hover td:first-child { background: #101c18; }
+  tbody tr.negative:hover td:first-child { background: #1e1115; }
 
-  .roi-pos { color: var(--positive); font-weight: 600; }
-  .roi-neg { color: var(--negative); font-weight: 600; }
-  .spend-val { color: #ffffff; font-weight: 600; }
-  .dep-val { color: var(--accent3); font-weight: 600; }
-  .rev-val { color: var(--accent3); }
+  /* Типографика данных */
+  .roi-pos, .camp-roi-pos { color: var(--positive); font-weight: 600; }
+  .roi-neg, .camp-roi-neg { color: var(--negative); font-weight: 600; }
+  .spend-val { color: var(--text-main); font-weight: 500; }
+  .dep-val { color: var(--brand); font-weight: 500; }
+  .rev-val { color: var(--text-main); font-weight: 500; }
 
-  th.sorted { color: var(--accent); }
-  th.sorted::after { content: ' ↓'; }
-  th.sorted.asc::after { content: ' ↑'; }
+  th.sorted { color: var(--text-main); font-weight: 600;}
+  th.sorted::after { content: ' ↓'; opacity: 0.6; }
+  th.sorted.asc::after { content: ' ↑'; opacity: 0.6; }
 
-  /* ТАБЛИЦА КАМПАНИЙ */
-  .campaigns-container { overflow-x: hidden; }
-
-  .account-group { margin-bottom: 4px; }
+  /* КАМПАНИИ */
+  .campaigns-container { padding-bottom: 20px; }
+  .account-group { margin-bottom: 16px; }
 
   .account-header {
-    background: var(--group-header);
-    border-top: 1px solid var(--accent);
+    background: var(--surface);
+    border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
-    padding: 8px 14px;
-    font-family: 'Unbounded', sans-serif;
-    font-size: 10px; font-weight: 700;
-    color: var(--accent); letter-spacing: 0.05em;
+    padding: 10px 16px;
+    font-size: 11px; font-weight: 600; text-transform: uppercase;
+    color: var(--text-main); letter-spacing: 0.05em;
     display: flex; justify-content: space-between; align-items: center;
   }
 
-  .account-totals { font-size: 9px; color: var(--muted); font-family: 'JetBrains Mono', monospace; font-weight: 400; }
+  .account-totals { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); font-weight: 400; text-transform: none; letter-spacing: 0;}
 
-  .camp-table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .camp-table thead th { background: var(--bg); border-bottom: 1px solid var(--border); }
+  .camp-table td { border-left: none; }
+  .camp-table tbody tr:nth-child(even) { background: rgba(255,255,255,0.01); }
+  .camp-table tbody tr:hover { background: var(--surface); }
 
-  .camp-table { width: 100%; border-collapse: collapse; min-width: 650px; }
-
-  .camp-table thead th {
-    background: var(--surface); color: var(--muted);
-    font-size: 9px; text-transform: uppercase; letter-spacing: 0.06em;
-    padding: 8px 10px; text-align: right;
-    border-bottom: 2px solid var(--border);
-    white-space: nowrap;
-  }
-
-  .camp-table thead th:first-child { text-align: left; min-width: 200px; }
-
-  .camp-table tbody tr {
-    border-bottom: 1px solid var(--border);
-    transition: background 0.15s;
-  }
-
-  .camp-table tbody tr:nth-child(even) { background: rgba(255,255,255,0.02); }
-  .camp-table tbody tr:hover, .camp-table tbody tr:active { background: #1a1a2e; }
-
-  .camp-table td { padding: 10px 10px; text-align: right; font-size: 10px; white-space: nowrap; color: var(--text); border-left: 1px solid rgba(255,255,255,0.03); }
-
-  .camp-table td:first-child {
-    text-align: left; color: #cccce0; font-size: 10px;
-    min-width: 200px; white-space: nowrap;
-    border-left: none; border-right: 1px solid var(--border);
-  }
-
-  .camp-roi-pos { color: var(--positive); font-weight: 600; }
-  .camp-roi-neg { color: var(--negative); font-weight: 600; }
-  .camp-cpl { color: var(--muted); }
-  .camp-cpd { color: var(--muted); }
-
-  /* ОБЩЕЕ */
-  .loading {
-    display: flex; flex-direction: column; align-items: center;
-    justify-content: center; padding: 60px 20px; gap: 16px;
-  }
-
-  .spinner {
-    width: 32px; height: 32px;
-    border: 2px solid var(--border); border-top-color: var(--accent);
-    border-radius: 50%; animation: spin 0.8s linear infinite;
-  }
-
+  /* СТАТУСЫ */
+  .loading { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 20px; gap: 16px; }
+  .spinner { width: 24px; height: 24px; border: 2px solid var(--border); border-top-color: var(--text-main); border-radius: 50%; animation: spin 0.8s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
-  .loading-text { color: var(--muted); font-size: 11px; letter-spacing: 0.1em; }
-
-  .error-box {
-    margin: 20px 14px; padding: 14px;
-    border: 1px solid var(--accent2); border-radius: 6px;
-    background: #1a0a0e; color: var(--accent2); font-size: 11px; line-height: 1.6;
-  }
-
-  .empty { padding: 40px; text-align: center; color: var(--muted); font-size: 11px; }
-
+  
+  .loading-text { color: var(--text-muted); font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+  
+  .error-box { margin: 20px 16px; padding: 16px; border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; background: rgba(239, 68, 68, 0.05); color: var(--negative); font-size: 12px; }
+  .empty { padding: 60px 20px; text-align: center; color: var(--text-muted); font-size: 12px; font-weight: 500;}
   .hidden { display: none !important; }
 
-  ::-webkit-scrollbar { height: 3px; width: 3px; }
+  /* СКРОЛЛБАР */
+  ::-webkit-scrollbar { height: 6px; width: 6px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #52525b; }
 </style>
 </head>
 <body>
 
 <div class="topbar">
   <div class="topbar-left">
-    <div class="topbar-title">📊 STATS <span class="live-badge">LIVE</span></div>
+    <div class="topbar-title">Stats <span class="live-badge">Live</span></div>
     <div class="topbar-date" id="dateRange">загрузка...</div>
   </div>
   <div class="topbar-right">
     <div class="updated-time" id="updatedTime"></div>
-    <button class="share-btn" id="shareBtn" onclick="shareLink()">🔗 поделиться</button>
+    <button class="share-btn" id="shareBtn" onclick="shareLink()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+      Поделиться
+    </button>
   </div>
 </div>
 
 <div id="totalsStrip" class="totals-strip" style="display:none">
   <div class="total-card"><div class="total-label">Spend</div><div class="total-value" id="t-spend">—</div></div>
-  <div class="total-card"><div class="total-label">Lids</div><div class="total-value" id="t-lids">—</div></div>
+  <div class="total-card"><div class="total-label">Leads</div><div class="total-value" id="t-lids">—</div></div>
   <div class="total-card"><div class="total-label">Dep</div><div class="total-value" id="t-dep">—</div></div>
   <div class="total-card"><div class="total-label">Rev</div><div class="total-value rev" id="t-rev">—</div></div>
   <div class="total-card"><div class="total-label">ROI</div><div class="total-value" id="t-roi">—</div></div>
 </div>
 
-<!-- ВКЛАДКИ -->
 <div class="tabs">
-  <div class="tab active" id="tab-creatives" onclick="switchTab('creatives')">🎨 Креативы</div>
-  <div class="tab" id="tab-campaigns" onclick="switchTab('campaigns')">📋 Кампании</div>
+  <div class="tab active" id="tab-creatives" onclick="switchTab('creatives')">Креативы</div>
+  <div class="tab" id="tab-campaigns" onclick="switchTab('campaigns')">Кампании</div>
 </div>
 
-<!-- ФИЛЬТР (только для креативов) -->
 <div class="filter-bar" id="filterBar">
   <input class="filter-input" id="filterInput" type="text"
-    placeholder="🔍 фильтр: it, bg, fr..."
+    placeholder="Поиск по креативам..."
     oninput="onFilter(this.value)"
     autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
   <button class="filter-clear" id="filterClear" onclick="clearFilter()">✕</button>
   <span class="filter-count" id="filterCount"></span>
 </div>
 
-<!-- КОНТЕНТ -->
 <div id="creativesView"></div>
 <div id="campaignsView" class="hidden"></div>
 
 <script>
+// --- JS остался без изменений ---
 const BASE = 'https://krisaze1.github.io/anfxcvietpqetsdghrwiutivjxdglqiwthidygzskqprotuvnzbdg/';
 let allCreatives = [];
 let allCampaigns = {};
@@ -333,7 +308,7 @@ function getFilename() {
 
 async function loadData() {
   document.getElementById('creativesView').innerHTML =
-    `<div class="loading"><div class="spinner"></div><div class="loading-text">ЗАГРУЗКА...</div></div>`;
+    `<div class="loading"><div class="spinner"></div><div class="loading-text">Загрузка данных</div></div>`;
   document.getElementById('totalsStrip').style.display = 'none';
 
   try {
@@ -357,7 +332,7 @@ async function loadData() {
 
   } catch(e) {
     document.getElementById('creativesView').innerHTML =
-      `<div class="error-box">⚠ Ошибка загрузки<br><br><span style="color:var(--muted)">${e.message}</span></div>`;
+      `<div class="error-box">Ошибка загрузки<br><br><span style="color:var(--text-muted)">${e.message}</span></div>`;
   }
 }
 
@@ -404,7 +379,7 @@ function clearFilter() {
 function renderCreatives() {
   const view = document.getElementById('creativesView');
   if (!allCreatives || allCreatives.length === 0) {
-    view.innerHTML = '<div class="empty">нет данных</div>';
+    view.innerHTML = '<div class="empty">Нет данных</div>';
     return;
   }
 
@@ -416,7 +391,7 @@ function renderCreatives() {
   countEl.textContent = filterText ? `${filtered.length} / ${allCreatives.length}` : `${allCreatives.length}`;
 
   if (filtered.length === 0) {
-    view.innerHTML = '<div class="empty">ничего не найдено</div>';
+    view.innerHTML = '<div class="empty">Ничего не найдено</div>';
     return;
   }
 
@@ -461,7 +436,7 @@ function renderCreatives() {
       if (idx !== -1) {
         creativeName =
           creativeName.slice(0, idx) +
-          `<mark style="background:rgba(0,255,136,0.3);color:var(--accent);border-radius:2px">` +
+          `<mark style="background:rgba(255,255,255,0.15);color:var(--text-main);border-radius:2px;padding:0 2px;">` +
           creativeName.slice(idx, idx + filterText.length) +
           `</mark>` +
           creativeName.slice(idx + filterText.length);
@@ -496,7 +471,7 @@ function renderCampaigns() {
   const view = document.getElementById('campaignsView');
 
   if (!allCampaigns || Object.keys(allCampaigns).length === 0) {
-    view.innerHTML = '<div class="empty">нет данных по кампаниям</div>';
+    view.innerHTML = '<div class="empty">Нет данных по кампаниям</div>';
     return;
   }
 
@@ -512,7 +487,7 @@ function renderCampaigns() {
     html += `<div class="account-group">
       <div class="account-header">
         <span>${accountName}</span>
-        <span class="account-totals">spend: ${fmt(accSpend)} | leads: ${accLeads} | dep: ${accDep}</span>
+        <span class="account-totals">Spend: ${fmt(accSpend)} | Leads: ${accLeads} | Dep: ${accDep}</span>
       </div>
       <div class="camp-table-wrapper">
         <table class="camp-table">
@@ -540,9 +515,9 @@ function renderCampaigns() {
         <td>${c.budget || '—'}</td>
         <td class="spend-val">${fmt(c.spend)}</td>
         <td>${c.leads || '—'}</td>
-        <td class="camp-cpl">${cpl}</td>
+        <td style="color:var(--text-muted)">${cpl}</td>
         <td class="dep-val">${c.dep || '—'}</td>
-        <td class="camp-cpd">${cpd}</td>
+        <td style="color:var(--text-muted)">${cpd}</td>
         <td class="${roiCls}">${roiText}</td>
       </tr>`;
     });
@@ -557,24 +532,30 @@ function renderCampaigns() {
 function shareLink() {
   const btn = document.getElementById('shareBtn');
   const url = window.location.href;
+  const originalText = btn.innerHTML;
+  
+  const successState = () => {
+    btn.innerHTML = '✓ Скопировано';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.innerHTML = originalText; btn.classList.remove('copied'); }, 2000);
+  };
+
   if (navigator.share) {
-    navigator.share({ title: '📊 Stats', url });
+    navigator.share({ title: 'Stats', url }).catch(() => copyToClipboard(url, successState));
     return;
   }
-  navigator.clipboard.writeText(url).then(() => {
-    btn.textContent = '✅ скопировано';
-    btn.classList.add('copied');
-    setTimeout(() => { btn.textContent = '🔗 поделиться'; btn.classList.remove('copied'); }, 2000);
-  }).catch(() => {
+  copyToClipboard(url, successState);
+}
+
+function copyToClipboard(text, callback) {
+  navigator.clipboard.writeText(text).then(callback).catch(() => {
     const el = document.createElement('textarea');
-    el.value = url;
+    el.value = text;
     document.body.appendChild(el);
     el.select();
     document.execCommand('copy');
     document.body.removeChild(el);
-    btn.textContent = '✅ скопировано';
-    btn.classList.add('copied');
-    setTimeout(() => { btn.textContent = '🔗 поделиться'; btn.classList.remove('copied'); }, 2000);
+    callback();
   });
 }
 
