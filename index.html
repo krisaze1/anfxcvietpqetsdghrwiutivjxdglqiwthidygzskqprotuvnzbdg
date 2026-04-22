@@ -213,29 +213,38 @@
 
   .camp-table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
-  .camp-table { width: 100%; border-collapse: collapse; min-width: 500px; }
+  .camp-table { width: 100%; border-collapse: collapse; min-width: 650px; }
 
   .camp-table thead th {
     background: var(--surface); color: var(--muted);
     font-size: 9px; text-transform: uppercase; letter-spacing: 0.06em;
-    padding: 6px 8px; text-align: right;
-    border-bottom: 1px solid var(--border);
+    padding: 8px 10px; text-align: right;
+    border-bottom: 2px solid var(--border);
     white-space: nowrap;
   }
 
-  .camp-table thead th:first-child { text-align: left; min-width: 180px; }
+  .camp-table thead th:first-child { text-align: left; min-width: 200px; }
 
-  .camp-table tbody tr { border-bottom: 1px solid var(--border); }
-  .camp-table tbody tr:hover, .camp-table tbody tr:active { background: #111120; }
+  .camp-table tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
 
-  .camp-table td { padding: 8px 8px; text-align: right; font-size: 10px; white-space: nowrap; color: var(--text); }
+  .camp-table tbody tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+  .camp-table tbody tr:hover, .camp-table tbody tr:active { background: #1a1a2e; }
+
+  .camp-table td { padding: 10px 10px; text-align: right; font-size: 10px; white-space: nowrap; color: var(--text); border-left: 1px solid rgba(255,255,255,0.03); }
 
   .camp-table td:first-child {
-    text-align: left; color: #aaaacc; font-size: 10px;
-    min-width: 180px;
-    /* Полное название — горизонтальный скролл */
-    white-space: nowrap;
+    text-align: left; color: #cccce0; font-size: 10px;
+    min-width: 200px; white-space: nowrap;
+    border-left: none; border-right: 1px solid var(--border);
   }
+
+  .camp-roi-pos { color: var(--positive); font-weight: 600; }
+  .camp-roi-neg { color: var(--negative); font-weight: 600; }
+  .camp-cpl { color: var(--muted); }
+  .camp-cpd { color: var(--muted); }
 
   /* ОБЩЕЕ */
   .loading {
@@ -512,19 +521,29 @@ function renderCampaigns() {
             <th>Budget</th>
             <th>Spend</th>
             <th>Leads</th>
+            <th>CPL</th>
             <th>Dep</th>
-            <th>Reg</th>
+            <th>CPD</th>
+            <th>ROI</th>
           </tr></thead>
           <tbody>`;
 
     camps.forEach(c => {
+      const cpl = c.leads > 0 ? (c.spend / c.leads).toFixed(2) : '—';
+      const cpd = c.dep > 0 ? (c.spend / c.dep).toFixed(2) : '—';
+      const revenue = c.revenue || 0;
+      const roi = c.spend > 0 && revenue > 0 ? (((revenue - c.spend) / c.spend) * 100).toFixed(1) : null;
+      const roiCls = roi !== null ? (parseFloat(roi) >= 0 ? 'camp-roi-pos' : 'camp-roi-neg') : '';
+      const roiText = roi !== null ? roi + '%' : '—';
       html += `<tr>
         <td title="${c.name}">${c.name}</td>
         <td>${c.budget || '—'}</td>
         <td class="spend-val">${fmt(c.spend)}</td>
         <td>${c.leads || '—'}</td>
+        <td class="camp-cpl">${cpl}</td>
         <td class="dep-val">${c.dep || '—'}</td>
-        <td>${c.reg || '—'}</td>
+        <td class="camp-cpd">${cpd}</td>
+        <td class="${roiCls}">${roiText}</td>
       </tr>`;
     });
 
