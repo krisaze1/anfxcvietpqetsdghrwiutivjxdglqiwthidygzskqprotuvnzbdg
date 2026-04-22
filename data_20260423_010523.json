@@ -2,8 +2,7 @@
   "meta": {
     "date_from": "2026-04-23",
     "date_to": "2026-04-23",
-    "updated_at": "2026-04-23 00:37:55",
-    "filename": "data_20260423_003755.json"
+    "updated_at": "2026-04-23 01:05:23"
   },
   "totals": {
     "Spend": 0,
@@ -16,5 +15,6 @@
     "Revenue": 0,
     "ROI": "0.00%"
   },
-  "data": []
+  "creatives": [],
+  "campaigns": {}
 }
