@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "date_from": "2026-04-23",
+    "date_to": "2026-04-23",
+    "updated_at": "2026-04-23 00:38:47",
+    "filename": "data_20260423_003847.json"
+  },
+  "totals": {
+    "Spend": 0,
+    "Clicks": 0,
+    "Avg CPC": 0,
+    "Lids": 0,
+    "CPL": 0,
+    "Reg": 0,
+    "Dep": 0,
+    "Revenue": 0,
+    "ROI": "0.00%"
+  },
+  "data": []
+}
