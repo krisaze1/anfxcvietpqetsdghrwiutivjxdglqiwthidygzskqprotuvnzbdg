@@ -2,43 +2,43 @@
   "meta": {
     "date_from": "2026-04-21",
     "date_to": "2026-04-23",
-    "updated_at": "2026-04-23 01:57:11"
+    "updated_at": "2026-04-23 02:50:02"
   },
   "totals": {
-    "Spend": 819,
-    "Clicks": 208,
-    "Avg CPC": 3.94,
-    "Lids": 182,
-    "CPL": 4.5,
-    "Reg": 72,
+    "Spend": 852,
+    "Clicks": 222,
+    "Avg CPC": 3.84,
+    "Lids": 189,
+    "CPL": 4.51,
+    "Reg": 76,
     "Dep": 11,
     "Revenue": 1890.19,
-    "ROI": "130.79%"
+    "ROI": "121.85%"
   },
   "creatives": [
     {
       "Creative": "itchickenugcaskcard18",
-      "Spend": 454,
-      "Clicks": 145,
-      "Avg CPC": 3.14,
-      "Lids": 56,
-      "CPL": 8.12,
-      "Reg": 33,
+      "Spend": 487,
+      "Clicks": 159,
+      "Avg CPC": 3.06,
+      "Lids": 58,
+      "CPL": 8.4,
+      "Reg": 34,
       "Dep": 6,
       "Revenue": 1056.45,
-      "ROI": "132.22%"
+      "ROI": "116.87%"
     },
     {
       "Creative": "itchickenugcaskcard13",
       "Spend": 122,
       "Clicks": 27,
-      "Avg CPC": 4.54,
-      "Lids": 33,
-      "CPL": 3.71,
-      "Reg": 14,
+      "Avg CPC": 4.56,
+      "Lids": 34,
+      "CPL": 3.62,
+      "Reg": 15,
       "Dep": 2,
       "Revenue": 352.49,
-      "ROI": "187.58%"
+      "ROI": "186.60%"
     },
     {
       "Creative": "itchickenugcaskcard16",
@@ -58,19 +58,19 @@
       "Clicks": 21,
       "Avg CPC": 3.18,
       "Lids": 28,
-      "CPL": 2.38,
+      "CPL": 2.39,
       "Reg": 10,
       "Dep": 1,
       "Revenue": 176.08,
-      "ROI": "163.91%"
+      "ROI": "163.51%"
     },
     {
       "Creative": "itchickenugcaskcard14",
       "Spend": 45,
       "Clicks": 1,
-      "Avg CPC": 45.08,
+      "Avg CPC": 45.17,
       "Lids": 5,
-      "CPL": 9.02,
+      "CPL": 9.03,
       "Reg": 2,
       "Dep": 0,
       "Revenue": 0,
@@ -117,9 +117,9 @@
       "Spend": 0,
       "Clicks": 0,
       "Avg CPC": 0,
-      "Lids": 38,
+      "Lids": 42,
       "CPL": 0.0,
-      "Reg": 5,
+      "Reg": 7,
       "Dep": 1,
       "Revenue": 134.99,
       "ROI": "0.00%"
@@ -154,10 +154,10 @@
       {
         "name": "skak_2204_pwadroid_IT_682774260501589itchickenugcaskcard18_3",
         "budget": 899.0,
-        "spend": 345,
-        "leads": 36,
+        "spend": 377,
+        "leads": 38,
         "dep": 3,
-        "reg": 27,
+        "reg": 28,
         "revenue": 528.21
       },
       {
@@ -235,7 +235,7 @@
       {
         "name": "skak_2204_pwadroid_IT_682774260501589itchickenugcaskcard13_1",
         "budget": 84.0,
-        "spend": 16,
+        "spend": 17,
         "leads": 1,
         "dep": 0,
         "reg": 1,
@@ -337,7 +337,7 @@
         "spend": 13,
         "leads": 0,
         "dep": 3,
-        "reg": 27,
+        "reg": 28,
         "revenue": 528.21
       },
       {
