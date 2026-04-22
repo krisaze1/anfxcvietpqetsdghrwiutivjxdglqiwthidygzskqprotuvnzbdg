@@ -1,0 +1,105 @@
+{
+  "meta": {
+    "date_from": "2026-04-22",
+    "date_to": "2026-04-22",
+    "updated_at": "2026-04-22 17:41:03",
+    "filename": "data_20260422_174103.json"
+  },
+  "totals": {
+    "Spend": 944,
+    "Clicks": 142,
+    "Avg CPC": 6.65,
+    "Lids": 55,
+    "CPL": 17.16,
+    "Reg": 20,
+    "Dep": 3,
+    "Revenue": 487.48,
+    "ROI": "-48.36%"
+  },
+  "data": [
+    {
+      "Creative": "itchickenugcaskcard15",
+      "Spend": 253,
+      "Clicks": 51,
+      "Avg CPC": 4.96,
+      "Lids": 13,
+      "CPL": 19.48,
+      "Reg": 4,
+      "Dep": 0,
+      "Revenue": 0,
+      "ROI": "-100.00%"
+    },
+    {
+      "Creative": "itchickenugcaskcard13",
+      "Spend": 252,
+      "Clicks": 39,
+      "Avg CPC": 6.47,
+      "Lids": 13,
+      "CPL": 19.41,
+      "Reg": 4,
+      "Dep": 1,
+      "Revenue": 176.41,
+      "ROI": "-30.08%"
+    },
+    {
+      "Creative": "itchickenugcaskcard16",
+      "Spend": 165,
+      "Clicks": 19,
+      "Avg CPC": 8.73,
+      "Lids": 8,
+      "CPL": 20.73,
+      "Reg": 3,
+      "Dep": 0,
+      "Revenue": 0,
+      "ROI": "-100.00%"
+    },
+    {
+      "Creative": "itchickenugcaskcard18",
+      "Spend": 144,
+      "Clicks": 22,
+      "Avg CPC": 6.59,
+      "Lids": 9,
+      "CPL": 16.1,
+      "Reg": 5,
+      "Dep": 1,
+      "Revenue": 176.08,
+      "ROI": "21.52%"
+    },
+    {
+      "Creative": "itchickenugcaskcard14",
+      "Spend": 130,
+      "Clicks": 11,
+      "Avg CPC": 11.84,
+      "Lids": 1,
+      "CPL": 130.19,
+      "Reg": 0,
+      "Dep": 0,
+      "Revenue": 0,
+      "ROI": "-100.00%"
+    },
+    {
+      "Creative": "не нашли",
+      "Spend": 0,
+      "Clicks": 0,
+      "Avg CPC": 0,
+      "Lids": 10,
+      "CPL": 0.0,
+      "Reg": 4,
+      "Dep": 1,
+      "Revenue": 134.99,
+      "ROI": "0.00%"
+    },
+    {
+      "Creative": "itchickenugcshoping1",
+      "Spend": 0,
+      "Clicks": 0,
+      "Avg CPC": 0,
+      "Lids": 1,
+      "CPL": 0.0,
+      "Reg": 0,
+      "Dep": 0,
+      "Revenue": 0,
+      "ROI": "0.00%"
+    }
+  ]
+}
