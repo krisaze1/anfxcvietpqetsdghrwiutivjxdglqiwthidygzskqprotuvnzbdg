@@ -2,27 +2,27 @@
   "meta": {
     "date_from": "2026-04-23",
     "date_to": "2026-04-23",
-    "updated_at": "2026-04-23 05:01:25"
+    "updated_at": "2026-04-23 11:00:51"
   },
   "totals": {
-    "Spend": 37,
-    "Clicks": 13,
-    "Avg CPC": 2.85,
-    "Lids": 5,
-    "CPL": 7.4,
-    "Reg": 1,
+    "Spend": 73,
+    "Clicks": 16,
+    "Avg CPC": 4.56,
+    "Lids": 12,
+    "CPL": 6.08,
+    "Reg": 2,
     "Dep": 1,
     "Revenue": 176.05,
-    "ROI": "375.81%"
+    "ROI": "141.16%"
   },
   "creatives": [
     {
       "Creative": "itchickenugcaskcard18",
-      "Spend": 37,
-      "Clicks": 13,
-      "Avg CPC": 2.86,
+      "Spend": 73,
+      "Clicks": 16,
+      "Avg CPC": 4.59,
       "Lids": 3,
-      "CPL": 12.37,
+      "CPL": 24.49,
       "Reg": 1,
       "Dep": 0,
       "Revenue": 0,
@@ -39,6 +39,30 @@
       "Dep": 1,
       "Revenue": 176.05,
       "ROI": "0.00%"
+    },
+    {
+      "Creative": "itchickenugcaskcard15",
+      "Spend": 0,
+      "Clicks": 0,
+      "Avg CPC": 0,
+      "Lids": 4,
+      "CPL": 0.0,
+      "Reg": 1,
+      "Dep": 0,
+      "Revenue": 0,
+      "ROI": "0.00%"
+    },
+    {
+      "Creative": "не нашли",
+      "Spend": 0,
+      "Clicks": 0,
+      "Avg CPC": 0,
+      "Lids": 3,
+      "CPL": 0.0,
+      "Reg": 0,
+      "Dep": 0,
+      "Revenue": 0,
+      "ROI": "0.00%"
     }
   ],
   "campaigns": {
@@ -46,7 +70,7 @@
       {
         "name": "skak_2204_pwadroid_IT_682774260501589itchickenugcaskcard18_3",
         "budget": 199.0,
-        "spend": 37,
+        "spend": 73,
         "leads": 5,
         "dep": 0,
         "reg": 1,
